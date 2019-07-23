@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrap">
+        <div class="boxwrap">
+        <div class="box1 box">
+            <div class="top">
+                <div class="categoryTitle">
+                    <span>상품분류</span>
+                </div>
+
+                <div class="searchwrap">
+                    <span>상품검색</span>
+
+                    <div class="search">
+                        <input type="text" placeholder="상품명을 입력해주세요">
+                        <span class="searchicon"><a href="#">검색아이콘</a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <ul id="category">
+                </ul>
+
+                <div class="item">
+                    <div class="itemname">
+                        <span class="itemTitle">상품이름</span>
+
+                        <ul id="itemnamelist">
+                            <!-- <li><a href=""></a></li> -->
+                        </ul>
+                    </div>
+
+                    <div class="itemprice">
+                        <span class="itemTitle">가격</span>
+                        <ul id="itempricelist"> 
+                            <!-- <li><a href=""></a></li> -->
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="itemcontent">
+                    <div class="itemimage">
+                        <img src="./img/item/buldark.jpg" alt="상품이미지">
+                    </div>
+
+                    <p class="itemcontentname">불닭볶음면</p>
+                    <p class="itemcontentdetail">화끈한 라면</p>
+                    <p class="itemcontentprice">3500</span><span>원</p>
+
+                    <div class="shoppingicon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- box1 : 상품분류, 상품검색, 상품정보 -->
+        <div class="box2 box">
+            <div class="orderTitle">
+                주문목록
+            </div>
+
+            <div class="ordercontent">
+                <div class="orderlist">
+                    <div class="ordername">
+                        <div class="ordernameTitle title">상품이름</div>
+                        <ul class="ordernamelist">
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="orderprice">
+                        <div class="orderpriceTitle title">가격</div>
+                        <ul class="orderpricelist">
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="orderamount">
+                        <div class="orderamountTitle title">수량</div>
+                        <ul class="orderamountlist">
+                            <li><select name="amount" id="amount">
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                                <option value="">4</option>
+                                <option value="">5</option>
+                                <option value="">6</option>
+                                <option value="">7</option>
+                                <option value="">8</option>
+                                <option value="">9</option>
+                                <option value="">10</option>
+                            </select></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+
+                    <div class="orderdelete">
+                        <div class="orderdeleteTitle title">삭제</div>
+                        <ul class="orderdeletelist">
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ordercalc">
+                    <div>
+                    <span class="totalpriceTitle">주문금액</span>
+                    <span class="totalprice"> </span><span class="won">원</span>
+                    </div>
+                    <div>
+                        <span class="paymentTitle">지불방법</span>
+                        <input type="radio" name="payment" value="현금">현금
+                        <input type="radio" name="payment" value="카드">카드
+
+                    </div>
+                    <div>
+                    <span class="paymentamountTitle">지불금액</span>
+                    <span class="paymentamount"> </span><span class="won">원</span>
+                    </div>
+                    <div>
+                    <span class="changeTitle">거스름돈</span>
+                    <span class="change"> </span><span class="won">원</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="orderbutton">
+                <button>주문하기</button>
+                <button>닫기</button>
+            </div>
+        </div>
+        <!-- box2 : 주문목록 -->
+
+
+    </div>
+    <!-- boxwrap -->
+    </div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="./js/javascript.js"></script>
+    
+
+</body>
+</html>

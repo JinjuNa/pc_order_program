@@ -1,0 +1,263 @@
+@charset 'utf-8';
+
+*{
+    padding:0; margin:0;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    color:inherit;
+    text-decoration: none;
+}
+
+
+#wrap{
+    width: 100%;
+    min-width:800px;
+    margin:0 auto;
+}
+
+.boxwrap:after{
+    display: block;
+    clear:both;
+    content:'';
+}
+
+.box{
+    float:left;
+    height: 480px;
+    
+}
+
+.box1{
+    width:70%;
+}
+
+.box2{
+    width:30%;  
+    position:relative;
+}
+
+/* box1 영역 */
+.box1 .top{
+    height: 80px;
+    width:100%;
+    background-color: #eee;
+    position: relative;
+}
+.categoryTitle{
+    width:20%;
+    text-align: center;
+    line-height: 80px;
+    background-color:#fff;
+}
+
+.searchwrap{
+    position: absolute;
+    top:0;
+    left:200px;
+    height: 80px;
+    line-height: 80px;
+   
+}
+
+.searchwrap>span{
+    margin:0 50px ;
+}
+
+.search{
+    display: inline-block;
+}
+
+.searchicon{
+    font-size:2px;
+}
+
+.search input{
+    width:250px;
+    height: 30px;
+}
+/* top */
+.content:after{
+    display: block;
+    clear:both;
+    content:'';
+}
+
+#category{
+    width:20%;
+    float: left;
+}
+
+.content #category li{
+    height: 80px;
+    width: 100%;
+    background-color:#666;
+    text-align: center;
+    color:white;
+    line-height: 80px;
+}
+
+.content #category li a{
+    display: block;
+    width:100%;
+    height: 100%;
+}
+
+.item{
+    float:left;
+    width:50%;
+}
+
+.item:after{
+    display: block;
+    clear: both;
+    content: '';
+}
+
+.item>div{
+    float:left;
+    text-align: center;
+}
+
+.itemname{
+    width:60%;
+}
+
+.itemprice{
+    width:40%;
+}
+
+
+.itemTitle{
+    display: block;
+    height: 48px;
+    line-height: 48px;
+    background-color:#777;
+}
+
+.item ul li{
+    width:100%;
+    height: 32px;
+    line-height: 32px;
+    /* background-color:#eee; */
+    border-bottom:1px solid #fff;
+    box-sizing: border-box;
+}
+
+.itemcontent{
+    width:30%;
+    float: left;
+    background-color: #fff;
+    height: 400px;
+    
+    
+}
+.itemcontent .itemimage{
+    text-align: center;
+    margin:100px 0 50px 0;
+}
+
+.itemcontent img{
+    width:150px;
+    margin:0 auto;
+}
+
+.itemcontent p{
+    margin-left:20px;
+}
+
+/* box2 영역 */
+
+.box2 .orderTitle{
+    width:100%;
+    height: 80px;
+    background-color:#888;
+    color:white;
+    text-align: center;
+    line-height: 80px;
+}
+
+
+.orderlist:after{
+    display: block;
+    clear:both;
+    content: '';
+}
+
+.orderlist>div{
+    float:left;
+}
+
+.ordercontent .ordername{
+    width:55%;
+}
+
+.ordercontent .orderprice{
+    width:25%;
+}
+
+.ordercontent .orderamount, .orderdelete{
+    width:10%;
+}
+
+
+.title{
+    width:100%;
+    height: 48px;
+    text-align: center;
+    background-color:#ddd;
+    line-height: 48px;
+}
+
+.orderlist ul li{
+    width:100%;
+    height: 32px;
+    background-color:#fff;
+    border-bottom: 1px solid #777;
+    box-sizing: border-box;
+}
+
+.ordercalc{
+    height: 160px;
+    background-color:#ddd;
+}
+
+.ordercalc>div{
+    width:80%;
+    margin:0 auto;
+    
+    padding-top:3px;
+}
+
+.ordercalc input{
+    margin-left:50px;
+}
+
+.totalprice, .paymentamount, .change{
+    width:200px;
+    display: inline-block;
+}
+
+.won{
+    float: right;
+    margin-left:50px;
+}
+
+.orderbutton{
+    position: absolute;
+    bottom:10px;
+    left:50%;
+    margin-left:-123px;
+}
+
+.orderbutton button{
+    width:120px;
+    height: 40px;
+    background-color: #666;
+    border:none;
+    color:#fff;
+}
