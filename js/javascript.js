@@ -131,10 +131,17 @@ function itemNameList(a){
     }
     document.getElementById('itemnamelist').innerHTML=itemNameList;
     document.getElementById('itempricelist').innerHTML=itemPriceList;
+   
 };
+window.onload = function(){
 
+$('#category li').click(function(){
+    $(this).siblings().css({'backgroundColor' : '#666'})
+    $(this).css({'backgroundColor' : '#777'})
+})
 $('#category li:nth-child(2)').click(function(){
     itemNameList(ramyun);
+    
 });
 $('#category li:nth-child(3)').click(function(){
     itemNameList(friedrice);
@@ -146,6 +153,12 @@ $('#category li:nth-child(5)').click(function(){
     itemNameList(drink);
 });
 
+$('#itemnamelist li').click(function(){
+    $(this).siblings().css({'backgroundColor' : '#666'})
+    $(this).css({'backgroundColor' : '#777'})
+})
+
+}
 
 
 
