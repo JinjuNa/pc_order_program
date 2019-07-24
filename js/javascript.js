@@ -137,11 +137,21 @@ function itemNameList(a){
 //itemcontent 보이기
 //라면
 
-//a=1 --> categorynum =1인 categoryName = ramyun
+//a=1 --> categorynum =1인 categoryName = ramyun (카테고리 넘버로 들어온 a값1이, ramyun으로 바꼈으면 좋겠다.)
 //즉 categorynum 1이고, idx인 물품의 name//datail//price
 function itemcontent(a,b){
-    var image = '<img src="./img/item/' +a[b].image + '"    >'
-    var categoryName
+    var categoryName;
+    switch(a){
+        case 1 : categoryName = ramyun;
+        break;
+        case 2 : categoryName = friedrice;
+        break;
+        case 3 : categoryName = snack;
+        break;
+        case 4 : categoryName = drink;
+        break
+    }
+    var image = '<img src="./img/item/' +categoryName[b].image + '">'
     var name = categoryName[b].name;
     var detail = categoryName[b].detail;
     var price = categoryName[b].price;
@@ -159,10 +169,11 @@ $(document).on('click', '#itemnamelist li', function(){
     $('#itempricelist li').siblings().removeClass("active")
     $('#itempricelist li:nth-child('+itemidx+')').addClass("active")
 
+    //선택한 아이의 활성화된 category의 index값을 categoryidx변수에 담았다.
     var li = document.querySelectorAll('#itemnamelist li');
     var categoryidx = $('#category li.active').index();
-    alert(categoryidx);
-    function li_click(categoryidx, idx){
+    // alert(categoryidx);
+    function li_click(idx){
         li[idx].onclick = function(){
             itemcontent(categoryidx,idx);
         };
