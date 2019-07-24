@@ -126,13 +126,32 @@ function itemNameList(a){
     var itemNameList = '';
     var itemPriceList = '';
     for(var i=0; i<a.length; i++){
-        itemNameList += '<li><a href="#">' + a[i].name +'</a></li>'
+        itemNameList += '<li onclick="itemListClick(this)"><a href="#">' + a[i].name +'</a></li>'
         itemPriceList += '<li><a href="#">' + a[i].price +'</a></li>'
     }
     document.getElementById('itemnamelist').innerHTML=itemNameList;
     document.getElementById('itempricelist').innerHTML=itemPriceList;
-   
+    
 };
+
+//itemcontent 보이기
+//라면
+function itemcontent(a,b){
+    var image = '<img src="./img/item/' +'lemonade.jpg' + '">'
+    var name = a[b].name;
+    var detail = a[b].detail;
+    var price = a[b].price;
+    document.getElementById('itemimage').innerHTML= image;
+    document.getElementById('itemcontentname').innerHTML= name;
+    document.getElementById('itemcontentdetail').innerHTML= detail;
+    document.getElementById('itemcontentprice').innerHTML= price + '원';
+};
+
+function itemListClick(item){
+    $(item).siblings().css({'backgroundColor' : '#fff'})
+    $(item).css({'backgroundColor' : '#ddd'})
+    itemcontent(drink, 1);
+}
 window.onload = function(){
 
 $('#category li').click(function(){
@@ -153,10 +172,15 @@ $('#category li:nth-child(5)').click(function(){
     itemNameList(drink);
 });
 
-$('#itemnamelist li').click(function(){
+$('#itempricelist li').click(function(){
     $(this).siblings().css({'backgroundColor' : '#666'})
-    $(this).css({'backgroundColor' : '#777'})
-})
+    $(this).css({'backgroundColor' : '#000'})
+});
+
+
+$('#itempricelist li').click(function(){
+    $(this).addClass('active');
+});
 
 }
 

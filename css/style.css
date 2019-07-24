@@ -81,6 +81,10 @@ a{
     height: 30px;
 }
 /* top */
+.content{
+    height: 400px;
+}
+
 .content:after{
     display: block;
     clear:both;
@@ -110,6 +114,8 @@ a{
 .item{
     float:left;
     width:50%;
+    height: 100%;
+    /* background-color: aqua; */
 }
 
 .item:after{
@@ -144,7 +150,7 @@ a{
     height: 32px;
     line-height: 32px;
     /* background-color:#eee; */
-    border-bottom:1px solid #fff;
+    /* border-bottom:1px solid #fff; */
     box-sizing: border-box;
 }
 
@@ -166,7 +172,7 @@ a{
     
     
 }
-.itemcontent .itemimage{
+.itemcontent #itemimage{
     text-align: center;
     margin:100px 0 50px 0;
 }
@@ -244,7 +250,7 @@ a{
 }
 
 .ordercalc input{
-    margin-left:50px;
+    margin-left:30px;
 }
 
 .totalprice, .paymentamount, .change{
