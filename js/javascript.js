@@ -126,7 +126,7 @@ function itemNameList(a){
     var itemNameList = '';
     var itemPriceList = '';
     for(var i=0; i<a.length; i++){
-        itemNameList += '<li onclick="itemListClick(this)"><a href="#">' + a[i].name +'</a></li>'
+        itemNameList += '<li><a href="#">' + a[i].name +'</a></li>'
         itemPriceList += '<li><a href="#">' + a[i].price +'</a></li>'
     }
     document.getElementById('itemnamelist').innerHTML=itemNameList;
@@ -136,31 +136,53 @@ function itemNameList(a){
 
 //itemcontent 보이기
 //라면
+
+//a=1 --> categorynum =1인 categoryName = ramyun
+//즉 categorynum 1이고, idx인 물품의 name//datail//price
 function itemcontent(a,b){
-    var image = '<img src="./img/item/' +'lemonade.jpg' + '">'
-    var name = a[b].name;
-    var detail = a[b].detail;
-    var price = a[b].price;
+    var image = '<img src="./img/item/' +a[b].image + '"    >'
+    var categoryName
+    var name = categoryName[b].name;
+    var detail = categoryName[b].detail;
+    var price = categoryName[b].price;
     document.getElementById('itemimage').innerHTML= image;
     document.getElementById('itemcontentname').innerHTML= name;
     document.getElementById('itemcontentdetail').innerHTML= detail;
     document.getElementById('itemcontentprice').innerHTML= price + '원';
 };
 
-function itemListClick(item){
-    $(item).siblings().css({'backgroundColor' : '#fff'})
-    $(item).css({'backgroundColor' : '#ddd'})
-    itemcontent(drink, 1);
-}
+//선택한 항목 활성화
+$(document).on('click', '#itemnamelist li', function(){
+    $(this).siblings().removeClass("active")
+    $(this).addClass("active")
+    var itemidx = $(this).index() + 1;
+    $('#itempricelist li').siblings().removeClass("active")
+    $('#itempricelist li:nth-child('+itemidx+')').addClass("active")
+
+    var li = document.querySelectorAll('#itemnamelist li');
+    var categoryidx = $('#category li.active').index();
+    alert(categoryidx);
+    function li_click(categoryidx, idx){
+        li[idx].onclick = function(){
+            itemcontent(categoryidx,idx);
+        };
+    }    
+    for(var i=0; i<li.length; i++){
+        li_click(i);
+    }
+})
+
+
+
 window.onload = function(){
 
 $('#category li').click(function(){
-    $(this).siblings().css({'backgroundColor' : '#666'})
-    $(this).css({'backgroundColor' : '#777'})
+    $(this).siblings().removeClass("active")
+    $(this).addClass("active")
+    
 })
 $('#category li:nth-child(2)').click(function(){
     itemNameList(ramyun);
-    
 });
 $('#category li:nth-child(3)').click(function(){
     itemNameList(friedrice);
@@ -172,15 +194,10 @@ $('#category li:nth-child(5)').click(function(){
     itemNameList(drink);
 });
 
-$('#itempricelist li').click(function(){
-    $(this).siblings().css({'backgroundColor' : '#666'})
-    $(this).css({'backgroundColor' : '#000'})
-});
-
-
-$('#itempricelist li').click(function(){
-    $(this).addClass('active');
-});
+// $('#itempricelist li').click(function(){
+//     $(this).siblings().css({'backgroundColor' : '#666'})
+//     $(this).css({'backgroundColor' : '#000'})
+// });
 
 }
 

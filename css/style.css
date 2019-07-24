@@ -111,6 +111,10 @@ a{
     height: 100%;
 }
 
+#category li.active{
+    background-color:#777;
+}
+
 .item{
     float:left;
     width:50%;
@@ -161,7 +165,11 @@ a{
 }
 
 #itemnamelist li.active{
-    background-color: #999;
+    background-color: #ddd;
+}
+
+#itempricelist li.active{
+    background-color: #ddd;
 }
 
 .itemcontent{
