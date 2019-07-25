@@ -168,19 +168,20 @@ $(document).on('click', '#itemnamelist li', function(){
     var itemidx = $(this).index() + 1;
     $('#itempricelist li').siblings().removeClass("active")
     $('#itempricelist li:nth-child('+itemidx+')').addClass("active")
+    var categoryidx = $('#category li.active').index(); 
+    itemcontent(categoryidx,itemidx-1)
 
     //선택한 아이의 활성화된 category의 index값을 categoryidx변수에 담았다.
-    var li = document.querySelectorAll('#itemnamelist li');
-    var categoryidx = $('#category li.active').index();
-    // alert(categoryidx);
-    function li_click(idx){
-        li[idx].onclick = function(){
-            itemcontent(categoryidx,idx);
-        };
-    }    
-    for(var i=0; i<li.length; i++){
-        li_click(i);
-    }
+    // var li = document.querySelectorAll('#itemnamelist li'); //클릭할 li를 변수 li에 담음(나중에 선택한 li의 index값 얻기 위해 )
+    // var categoryidx = $('#category li.active').index();     //선택되어있는(active클래스가 담겨있는) #category의 li.active의 인덱스를 변수 categoryidx에 담음
+    // function li_click(idx){ // idx를 변수를 가지는 li_click 함수 생성
+    //     li[idx].onclick = function(){   //인덱스가 idx인 li를 클릭했을때 다음과 같은 함수를 실행시킨다. //왜 이렇게 표현하는 거죠?
+    //         itemcontent(categoryidx,idx);   //위에서 정의해줬던 itemcontent를  categoryidx와 idx에 맞게 실행시킨다.
+    //     };
+    // }    
+    // for(var i=0; i<li.length; i++){
+    //     li_click(i);        //얘는 왜 있는 걸까요..? 근데 얘가 없으면 실행이 안되요 ㅜ.ㅜ
+    // }
 })
 
 

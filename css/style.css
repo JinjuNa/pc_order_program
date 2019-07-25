@@ -177,12 +177,14 @@ a{
     float: left;
     background-color: #fff;
     height: 400px;
+    position: relative;
     
     
 }
 .itemcontent #itemimage{
     text-align: center;
-    margin:100px 0 50px 0;
+    margin:50px 0 0px 0;
+    height: 200px;
 }
 
 .itemcontent img{
@@ -192,6 +194,18 @@ a{
 
 .itemcontent p{
     margin-left:20px;
+}
+
+.shoppingicon{
+    position: absolute;
+    bottom:10px;
+    right:5px;
+    
+}
+
+.shoppingicon button{
+    width:70px;
+    height:70px;
 }
 
 /* box2 영역 */
