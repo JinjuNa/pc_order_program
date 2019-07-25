@@ -161,28 +161,72 @@ function itemcontent(a,b){
     document.getElementById('itemcontentprice').innerHTML= price + '원';
 };
 
-//선택한 항목 활성화
+//선택한 항목 활성화 & 아이템 정보띄우기
 $(document).on('click', '#itemnamelist li', function(){
     $(this).siblings().removeClass("active")
     $(this).addClass("active")
-    var itemidx = $(this).index() + 1;
+    var itemidx = $(this).index();
     $('#itempricelist li').siblings().removeClass("active")
-    $('#itempricelist li:nth-child('+itemidx+')').addClass("active")
+    $('#itempricelist li:nth-child('+(itemidx+1)+')').addClass("active")
     var categoryidx = $('#category li.active').index(); 
-    itemcontent(categoryidx,itemidx-1)
+    itemcontent(categoryidx,itemidx)
 
-    //선택한 아이의 활성화된 category의 index값을 categoryidx변수에 담았다.
-    // var li = document.querySelectorAll('#itemnamelist li'); //클릭할 li를 변수 li에 담음(나중에 선택한 li의 index값 얻기 위해 )
-    // var categoryidx = $('#category li.active').index();     //선택되어있는(active클래스가 담겨있는) #category의 li.active의 인덱스를 변수 categoryidx에 담음
-    // function li_click(idx){ // idx를 변수를 가지는 li_click 함수 생성
-    //     li[idx].onclick = function(){   //인덱스가 idx인 li를 클릭했을때 다음과 같은 함수를 실행시킨다. //왜 이렇게 표현하는 거죠?
-    //         itemcontent(categoryidx,idx);   //위에서 정의해줬던 itemcontent를  categoryidx와 idx에 맞게 실행시킨다.
-    //     };
-    // }    
-    // for(var i=0; i<li.length; i++){
-    //     li_click(i);        //얘는 왜 있는 걸까요..? 근데 얘가 없으면 실행이 안되요 ㅜ.ㅜ
-    // }
+    //장바구니 버튼 클릭했을때 주문목록에 상품정보띄우기
+    
+    //shopping button을 눌렀을때, 지금 #itemlist li중 엑티브 클래스가 붙은 아이의 상품이름과 가격을 주문목록에 추가시키고 싶다.
+    //상품이름을 어디서 가져올 것인가? 카테고리 인덱스번호와 li의 인덱스 번호를 통해서
+    var ordernamelist='';
+    var orderpricelist='';
+    
+    $('#shoppingbutton').click(function(){
+        //엑티브되어 있는 li의 item 인덱스값    //카테고리의 인덱스값도 알아야하나?
+        var categoryidx = $('#category li.active').index();     
+        var orderidx = $('#itemnamelist li.active').index(); 
+        function addOrder(a,b){
+            var categoryName;
+            switch(a){
+                case 1 : categoryName = ramyun;
+                break;
+                case 2 : categoryName = friedrice;
+                break;
+                case 3 : categoryName = snack;
+                break;
+                case 4 : categoryName = drink;
+                break
+            }       
+            var ordernamelist='';
+            var orderpricelist = '';
+            ordernamelist += '<li>'+categoryName[b].name +'</li>';
+            orderpricelist += '<li>'+categoryName[b].price +'</li>';
+
+            document.getElementById('ordernamelist').innerHTML = ordernamelist;
+            document.getElementById('orderpricelist').innerHTML = orderpricelist;
+            
+            // namelist = document.getElementById('ordernamelist')
+            // pricelist = document.getElementById('orderpricelist')
+            // newOrderName = document.createElement('li');
+            // newOrderPrice = document.createElement('li');
+            // newName = document.createTextNode(categoryName[b].name)
+            // newPrice = document.createTextNode(categoryName[b].price)
+            // newOrderName.appendChild(newName);
+            // newOrderPrice.appendChild(newPrice);
+            // namelist.appendChild(newOrderName);
+            // pricelist.appendChild(newOrderPrice);
+
+            var TotalPrice = categoryName[b].price * 2
+
+            document.getElementById('totalprice').innerHTML=TotalPrice
+        }
+
+        addOrder(categoryidx, orderidx)
+
+        //shopping button클릭하면, 주문금액(가격*수량) 자동으로 나오기
+
+
+    })
 })
+
+
 
 
 
