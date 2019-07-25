@@ -161,6 +161,33 @@ function itemcontent(a,b){
     document.getElementById('itemcontentprice').innerHTML= price + '원';
 };
 
+window.onload = function(){
+
+    $('#category li').click(function(){
+        $(this).siblings().removeClass("active")
+        $(this).addClass("active")
+        
+    })
+    $('#category li:nth-child(2)').click(function(){
+        itemNameList(ramyun);
+    });
+    $('#category li:nth-child(3)').click(function(){
+        itemNameList(friedrice);
+    });
+    $('#category li:nth-child(4)').click(function(){
+        itemNameList(snack);
+    });
+    $('#category li:nth-child(5)').click(function(){
+        itemNameList(drink);
+    });
+    
+    // $('#itempricelist li').click(function(){
+    //     $(this).siblings().css({'backgroundColor' : '#666'})
+    //     $(this).css({'backgroundColor' : '#000'})
+    // });
+    
+    }
+
 //선택한 항목 활성화 & 아이템 정보띄우기
 $(document).on('click', '#itemnamelist li', function(){
     $(this).siblings().removeClass("active")
@@ -175,11 +202,12 @@ $(document).on('click', '#itemnamelist li', function(){
     
     //shopping button을 눌렀을때, 지금 #itemlist li중 엑티브 클래스가 붙은 아이의 상품이름과 가격을 주문목록에 추가시키고 싶다.
     //상품이름을 어디서 가져올 것인가? 카테고리 인덱스번호와 li의 인덱스 번호를 통해서
-    var ordernamelist='';
-    var orderpricelist='';
+    // var ordernamelist='';
+    // var orderpricelist='';
     
     $('#shoppingbutton').click(function(){
         //엑티브되어 있는 li의 item 인덱스값    //카테고리의 인덱스값도 알아야하나?
+        $('#won').show();
         var categoryidx = $('#category li.active').index();     
         var orderidx = $('#itemnamelist li.active').index(); 
         function addOrder(a,b){
@@ -194,32 +222,37 @@ $(document).on('click', '#itemnamelist li', function(){
                 case 4 : categoryName = drink;
                 break
             }       
-            var ordernamelist='';
-            var orderpricelist = '';
-            ordernamelist += '<li>'+categoryName[b].name +'</li>';
-            orderpricelist += '<li>'+categoryName[b].price +'</li>';
-
-            document.getElementById('ordernamelist').innerHTML = ordernamelist;
-            document.getElementById('orderpricelist').innerHTML = orderpricelist;
             
-            // namelist = document.getElementById('ordernamelist')
-            // pricelist = document.getElementById('orderpricelist')
-            // newOrderName = document.createElement('li');
-            // newOrderPrice = document.createElement('li');
-            // newName = document.createTextNode(categoryName[b].name)
-            // newPrice = document.createTextNode(categoryName[b].price)
-            // newOrderName.appendChild(newName);
-            // newOrderPrice.appendChild(newPrice);
-            // namelist.appendChild(newOrderName);
-            // pricelist.appendChild(newOrderPrice);
+            var namelist = document.getElementById('ordernamelist')
+            var pricelist = document.getElementById('orderpricelist')
+            // var amountlist = document.getElementById('orderamountlist')
+            
+            newOrderName = document.createElement('li');
+            newOrderPrice = document.createElement('li');
+            // newOrderamount = document.createElement('li');
+            newName = document.createTextNode(categoryName[b].name)
+            newPrice = document.createTextNode(categoryName[b].price)
 
-            var TotalPrice = categoryName[b].price * 2
-
+            newOrderName.appendChild(newName);
+            newOrderPrice.appendChild(newPrice);
+            // newOrderAmount.appendChild(newAmount);
+            namelist.appendChild(newOrderName);
+            pricelist.appendChild(newOrderPrice);
+            // amountlist.appendChild(newOrderAmount);
+            // console.log(newOrderName);
+            
+            
+            //주문금액 표시하기
+            var select = document.getElementById('amount');
+            // alert(select.options[select.selectedIndex].value);
+            // var selectValue = select.options[select.selectedIndex].value;
+            
+            var TotalPrice = categoryName[b].price * selectValue;
             document.getElementById('totalprice').innerHTML=TotalPrice
         }
 
         addOrder(categoryidx, orderidx)
-
+        
         //shopping button클릭하면, 주문금액(가격*수량) 자동으로 나오기
 
 
@@ -230,32 +263,7 @@ $(document).on('click', '#itemnamelist li', function(){
 
 
 
-window.onload = function(){
 
-$('#category li').click(function(){
-    $(this).siblings().removeClass("active")
-    $(this).addClass("active")
-    
-})
-$('#category li:nth-child(2)').click(function(){
-    itemNameList(ramyun);
-});
-$('#category li:nth-child(3)').click(function(){
-    itemNameList(friedrice);
-});
-$('#category li:nth-child(4)').click(function(){
-    itemNameList(snack);
-});
-$('#category li:nth-child(5)').click(function(){
-    itemNameList(drink);
-});
-
-// $('#itempricelist li').click(function(){
-//     $(this).siblings().css({'backgroundColor' : '#666'})
-//     $(this).css({'backgroundColor' : '#000'})
-// });
-
-}
 
 
 
