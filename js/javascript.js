@@ -189,6 +189,62 @@ window.onload = function(){
     }
 
 //선택한 항목 활성화 & 아이템 정보띄우기
+
+function addOrder(a,b){
+    var categoryName;
+    switch(a){
+        case 1 : categoryName = ramyun;
+        break;
+        case 2 : categoryName = friedrice;
+        break;
+        case 3 : categoryName = snack;
+        break;
+        case 4 : categoryName = drink;
+        break
+    }       
+    
+    var namelist = document.getElementById('ordernamelist')
+    var pricelist = document.getElementById('orderpricelist')
+    var amountlist = document.getElementById('orderamountlist')
+    var deletelist = document.getElementById('orderdeletelist')
+    
+    
+    newOrderName = document.createElement('li');
+    newOrderPrice = document.createElement('li');
+    newOrderAmount = document.createElement('li');
+    newOrderDelete = document.createElement('li');
+
+    newName = document.createTextNode(categoryName[b].name)
+    newPrice = document.createTextNode(categoryName[b].price)
+    selectBox = '<select name="amount" id="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'
+    deleteIcon = '<a href="#"><i class="fas fa-trash-alt"></i></a>'
+
+    newOrderName.appendChild(newName);
+    newOrderPrice.appendChild(newPrice);
+    newOrderAmount.innerHTML=selectBox;
+    newOrderDelete.innerHTML = deleteIcon;
+
+    
+
+    namelist.appendChild(newOrderName);
+    pricelist.appendChild(newOrderPrice);
+    amountlist.appendChild(newOrderAmount);
+    deletelist.appendChild(newOrderDelete);
+    // amountlist.appendChild(newOrderAmount);
+    // console.log(newOrderName);
+    
+    
+
+
+    //주문금액 표시하기
+    var select = document.getElementById('amount');
+    // alert(select.options[select.selectedIndex].value);
+    var selectValue = select.options[select.selectedIndex].value;
+    
+    var TotalPrice = categoryName[b].price * selectValue;
+    document.getElementById('totalprice').innerHTML=TotalPrice
+}
+
 $(document).on('click', '#itemnamelist li', function(){
     $(this).siblings().removeClass("active")
     $(this).addClass("active")
@@ -197,6 +253,8 @@ $(document).on('click', '#itemnamelist li', function(){
     $('#itempricelist li:nth-child('+(itemidx+1)+')').addClass("active")
     var categoryidx = $('#category li.active').index(); 
     itemcontent(categoryidx,itemidx)
+    $('.shoppingicon').show();
+
 
     //장바구니 버튼 클릭했을때 주문목록에 상품정보띄우기
     
@@ -205,59 +263,19 @@ $(document).on('click', '#itemnamelist li', function(){
     // var ordernamelist='';
     // var orderpricelist='';
     
-    $('#shoppingbutton').click(function(){
-        //엑티브되어 있는 li의 item 인덱스값    //카테고리의 인덱스값도 알아야하나?
-        $('#won').show();
-        var categoryidx = $('#category li.active').index();     
-        var orderidx = $('#itemnamelist li.active').index(); 
-        function addOrder(a,b){
-            var categoryName;
-            switch(a){
-                case 1 : categoryName = ramyun;
-                break;
-                case 2 : categoryName = friedrice;
-                break;
-                case 3 : categoryName = snack;
-                break;
-                case 4 : categoryName = drink;
-                break
-            }       
-            
-            var namelist = document.getElementById('ordernamelist')
-            var pricelist = document.getElementById('orderpricelist')
-            // var amountlist = document.getElementById('orderamountlist')
-            
-            newOrderName = document.createElement('li');
-            newOrderPrice = document.createElement('li');
-            // newOrderamount = document.createElement('li');
-            newName = document.createTextNode(categoryName[b].name)
-            newPrice = document.createTextNode(categoryName[b].price)
+    
+    
+});
 
-            newOrderName.appendChild(newName);
-            newOrderPrice.appendChild(newPrice);
-            // newOrderAmount.appendChild(newAmount);
-            namelist.appendChild(newOrderName);
-            pricelist.appendChild(newOrderPrice);
-            // amountlist.appendChild(newOrderAmount);
-            // console.log(newOrderName);
-            
-            
-            //주문금액 표시하기
-            var select = document.getElementById('amount');
-            // alert(select.options[select.selectedIndex].value);
-            // var selectValue = select.options[select.selectedIndex].value;
-            
-            var TotalPrice = categoryName[b].price * selectValue;
-            document.getElementById('totalprice').innerHTML=TotalPrice
-        }
-
-        addOrder(categoryidx, orderidx)
-        
-        //shopping button클릭하면, 주문금액(가격*수량) 자동으로 나오기
-
-
-    })
-})
+$('#shoppingbutton').click(function(){
+    //엑티브되어 있는 li의 item 인덱스값    //카테고리의 인덱스값도 알아야하나?
+    $('#won').show();
+    var categoryidx = $('#category li.active').index();     
+    var orderidx = $('#itemnamelist li.active').index(); 
+    addOrder(categoryidx, orderidx)
+    
+    //shopping button클릭하면, 주문금액(가격*수량) 자동으로 나오기
+});
 
 
 
