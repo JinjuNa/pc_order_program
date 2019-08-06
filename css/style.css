@@ -304,14 +304,14 @@ a{
     /* margin-left:50px; */
 }
 
-.orderbutton{
+.buttons{
     position: absolute;
     bottom:10px;
     left:50%;
     margin-left:-123px;
 }
 
-.orderbutton button{
+.buttons button{
     width:120px;
     height: 40px;
     background-color: #666;

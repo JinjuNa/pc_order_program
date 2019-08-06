@@ -278,6 +278,41 @@ $('#shoppingbutton').click(function(){
 });
 
 
+//delete아이콘 클릭했을때, 주문 목록 사라지기
+function deleteOrder(a){
+    var namelist = document.getElementById('ordernamelist')
+    var pricelist = document.getElementById('orderpricelist')
+    var amountlist = document.getElementById('orderamountlist')
+    var deletelist = document.getElementById('orderdeletelist')
+    namelist.removeChild(namelist.childNodes[a]);
+    pricelist.removeChild(pricelist.childNodes[a]);
+    amountlist.removeChild(amountlist.childNodes[a]);
+    deletelist.removeChild(deletelist.childNodes[a]);
+};
+
+$(document).on('click', '#orderdeletelist li', function(){
+    var deleteidx = $(this).index();
+    deleteOrder(deleteidx);
+   });
+
+
+
+$('#orderbutton').click(function(){
+
+    if(confirm('주문하신 내역은\n 불닭볶음면 1, 레몬에이드2 입니다.\n 거스름돈은 3000원 입니다.') == true){
+        alert('주문이 완료되었습니다')
+    }else(
+        alert('주문이 취소되었습니다')
+    )
+})
+
+
+
+
+
+
+
+
 
 
 
