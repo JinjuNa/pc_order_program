@@ -188,6 +188,8 @@ window.onload = function(){
     
     }
 
+
+
 //선택한 항목 활성화 & 아이템 정보띄우기
 
 function addOrder(a,b){
@@ -232,18 +234,49 @@ function addOrder(a,b){
     deletelist.appendChild(newOrderDelete);
     // amountlist.appendChild(newOrderAmount);
     // console.log(newOrderName);
-    
-    
-
+}
 
     //주문금액 표시하기
-    var select = document.getElementById('amount');
-    // alert(select.options[select.selectedIndex].value);
-    var selectValue = select.options[select.selectedIndex].value;
+    //1. addOrder발생시킬때 값 변화(증가)
+    //2. select value값 바뀌면 값 변화(증가/감소)
+    //3. deleteOrder발생시키면 값 변화(감소)
     
-    var TotalPrice = categoryName[b].price * selectValue;
-    document.getElementById('totalprice').innerHTML=TotalPrice
-}
+    var select = document.getElementById('amount');
+    var TotalPrice = 0;
+    function addAmount(a,b){
+
+        var categoryName;
+        switch(a){
+            case 1 : categoryName = ramyun;
+            break;
+            case 2 : categoryName = friedrice;
+            break;
+            case 3 : categoryName = snack;
+            break;
+            case 4 : categoryName = drink;
+            break
+        }         
+    // alert(select.options[select.selectedIndex].value);
+    // var selectValue = select.options[select.selectedIndex].value;
+    AddPrice = categoryName[b].price;
+    TotalPrice += AddPrice;
+    document.getElementById('totalprice').innerHTML=TotalPrice        
+    }
+
+    function selectAmount(a){
+        
+    }
+
+    //DeletePrice 정의하기
+    //선택한 아이콘의 idx에 해당하는 orderpircelist안의 idx번쨰 li의 내용을 가져오고싶다.
+    function deleteAmount(a){
+    var pricelist = document.getElementById('orderpricelist');
+    var pricelist_values = pricelist.getElementsByTagName('li')[a];
+    var DeletePrice = pricelist_values.childNodes[0].nodeValue;
+    alert(DeletePrice);
+    // DeletePrice = pricelist.childNodes[a].nodeValue;
+    TotalPrice = TotalPrice - DeletePrice;
+    }
 
 $(document).on('click', '#itemnamelist li', function(){
     $(this).siblings().removeClass("active")
@@ -272,8 +305,8 @@ $('#shoppingbutton').click(function(){
     $('#won').show();
     var categoryidx = $('#category li.active').index();     
     var orderidx = $('#itemnamelist li.active').index(); 
-    addOrder(categoryidx, orderidx)
-    
+    addOrder(categoryidx, orderidx);
+    addAmount(categoryidx, orderidx);
     //shopping button클릭하면, 주문금액(가격*수량) 자동으로 나오기
 });
 
@@ -293,6 +326,10 @@ function deleteOrder(a){
 $(document).on('click', '#orderdeletelist li', function(){
     var deleteidx = $(this).index();
     deleteOrder(deleteidx);
+    alert(deleteidx);
+    deleteAmount(deleteidx);
+    
+    
    });
 
 
