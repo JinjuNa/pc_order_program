@@ -300,6 +300,8 @@ $(document).on('click', '#itemnamelist li', function(){
     
 });
 
+//상품항목클릭 후 엔터를 누르면 상품정보 추가 addOrder 발생
+//검색기능때문에 안됨!
 $('#shoppingbutton').click(function(){
     //엑티브되어 있는 li의 item 인덱스값    //카테고리의 인덱스값도 알아야하나?
     $('#won').show();
@@ -323,10 +325,11 @@ function deleteOrder(a){
     deletelist.removeChild(deletelist.childNodes[a]);
 };
 
+//첫번째 항목은 두번 클릭해야 삭제가된다.
 $(document).on('click', '#orderdeletelist li', function(){
     var deleteidx = $(this).index();
     deleteOrder(deleteidx);
-    alert(deleteidx);
+    // alert(deleteidx);
     deleteAmount(deleteidx);
     
     
@@ -342,6 +345,21 @@ $('#orderbutton').click(function(){
         alert('주문이 취소되었습니다')
     )
 })
+
+//검색어 입력 후 엔터치면 이벤트 발생
+
+function onKeyDown()
+{
+     if(event.keyCode == 13)    //javascript에서는 13이 enter키를 의미함
+     {
+        // alert("a");
+     }
+}
+
+
+
+
+
 
 
 
