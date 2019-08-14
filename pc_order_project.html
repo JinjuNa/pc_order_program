@@ -21,7 +21,7 @@
                     <span>상품검색</span>
 
                     <div class="search">
-                        <input type="text" placeholder="상품명을 입력해주세요"  onKeyDown="onKeyDown()">
+                        <input type="text" placeholder="상품명을 입력해주세요">
                         <span class="searchicon"><a href="#">검색아이콘</a></span>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                 <ul id="category">
                 </ul>
 
-                <div class="item">
+                <!-- <div class="item">
                     <div class="itemname">
                         <span class="itemTitle">상품이름</span>
 
@@ -46,7 +46,35 @@
                         </ul>
 
                     </div>
-                </div>
+                </div> -->
+
+                <table class="item">
+                    <thead>
+                        <tr>
+                            <th class="co1">상품이름</th>
+                            <th class="co2">가격</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td class="co1">불닭볶음면</td>
+                            <td class="co2">3500</td>
+                        </tr>
+                        <tr>
+                            <td class="co1">진라면</td>
+                            <td class="co2">3000</td>
+                        </tr>
+                        <tr>
+                            <td class="co1">진라면</td>
+                            <td class="co2">3000</td>
+                        </tr>
+                        <tr>
+                            <td class="co1">진라면</td>
+                            <td class="co2">3000</td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <div class="itemcontent">
                     <div id="itemimage">
@@ -70,35 +98,43 @@
             </div>
 
             <div class="ordercontent">
-                <div class="orderlist">
-                    <div class="ordername">
-                        <div class="ordernameTitle title">상품이름</div>
-                        <ul id="ordernamelist">
-                            
-                        </ul>
-                    </div>
+                <table class="orderlist">
+                    <thead>
+                        <tr>
+                            <th class="co1">상품이름</th>
+                            <th class="co2">가격</th>
+                            <th class="co3">수량</th>
+                            <th class="co4">삭제</th>
+                        </tr>
+                    </thead>
 
-                    <div class="orderprice">
-                        <div class="orderpriceTitle title">가격</div>
-                        <ul id="orderpricelist">
-                            
-                        </ul>
-                    </div>
-
-                    <div class="orderamount">
-                        <div class="orderamountTitle title">수량</div>
-                        <ul id="orderamountlist">
-                            
-                        </ul>
-                    </div>
-
-                    <div class="orderdelete">
-                        <div class="orderdeleteTitle title">삭제</div>
-                        <ul id="orderdeletelist">
-                            
-                        </ul>
-                    </div>
-                </div>
+                    <tbody>
+                        <tr>
+                            <td class="co1">불닭볶음면</td>
+                            <td class="co2">3500</td>
+                            <td class="co3">2</td>
+                            <td class="co4">삭제</td>
+                        </tr>
+                        <tr>
+                            <td class="co1">불닭볶음면</td>
+                            <td class="co2">3500</td>
+                            <td class="co3">2</td>
+                            <td class="co4">삭제</td>
+                        </tr>
+                        <tr>
+                            <td class="co1">불닭볶음면</td>
+                            <td class="co2">3500</td>
+                            <td class="co3">2</td>
+                            <td class="co4">삭제</td>
+                        </tr>
+                        <tr>
+                            <td class="co1">불닭볶음면</td>
+                            <td class="co2">3500</td>
+                            <td class="co3">2</td>
+                            <td class="co4">삭제</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div class="ordercalc">
                     <div>
                     <span class="totalpriceTitle">주문금액</span>

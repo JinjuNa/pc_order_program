@@ -163,6 +163,10 @@ function itemcontent(a,b){
 
 window.onload = function(){
 
+    $('.search input').keyup(function(e){
+        alert(e.keyCode);
+    })
+
     $('#category li').click(function(){
         $(this).siblings().removeClass("active")
         $(this).addClass("active")
@@ -271,9 +275,13 @@ function addOrder(a,b){
     //선택한 아이콘의 idx에 해당하는 orderpircelist안의 idx번쨰 li의 내용을 가져오고싶다.
     function deleteAmount(a){
     var pricelist = document.getElementById('orderpricelist');
-    var pricelist_values = pricelist.getElementsByTagName('li')[a];
-    var DeletePrice = pricelist_values.childNodes[0].nodeValue;
-    alert(DeletePrice);
+    //var pricelist_values = pricelist.getElementsByTagName('li')[a];
+
+    
+    var DeletePrice = pricelist.getElementsByTagName('li')[a].innerText
+    //헤헷;;복붙하지마세용...
+    //var DeletePrice = pricelist_values.childNodes[0].nodeValue;
+    //console.log(DeletePrice);
     // DeletePrice = pricelist.childNodes[a].nodeValue;
     TotalPrice = TotalPrice - DeletePrice;
     }
@@ -330,8 +338,12 @@ $(document).on('click', '#orderdeletelist li', function(){
     var deleteidx = $(this).index();
     deleteOrder(deleteidx);
     // alert(deleteidx);
-    deleteAmount(deleteidx);
-    
+    //deleteAmount(deleteidx);
+    var price = $("#orderpricelist li").eq(deleteidx).text()
+    console.log(price)
+    TotalPrice -= price
+    document.getElementById('totalprice').innerHTML=TotalPrice   
+    console.log(TotalPrice)
     
    });
 
@@ -347,14 +359,19 @@ $('#orderbutton').click(function(){
 })
 
 //검색어 입력 후 엔터치면 이벤트 발생
+//event를 받을 파라미터
 
-function onKeyDown()
-{
-     if(event.keyCode == 13)    //javascript에서는 13이 enter키를 의미함
-     {
-        // alert("a");
-     }
-}
+// function onKeyDown(e)
+// {   
+//      if(e.keyCode == 13)    //javascript에서는 13이 enter키를 의미함
+//      {
+//         alert("a");
+//      }
+// }
+
+
+
+// onKeyDown();
 
 
 
