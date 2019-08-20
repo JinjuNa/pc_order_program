@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://kit.fontawesome.com/6cf8dee3cc.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="./js/javascript.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -51,28 +53,13 @@
                 <table class="item">
                     <thead>
                         <tr>
-                            <th class="co1">상품이름</th>
-                            <th class="co2">가격</th>
+                            <th class="coName">상품이름</th>
+                            <th class="coPrice">가격</th>
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td class="co1">불닭볶음면</td>
-                            <td class="co2">3500</td>
-                        </tr>
-                        <tr>
-                            <td class="co1">진라면</td>
-                            <td class="co2">3000</td>
-                        </tr>
-                        <tr>
-                            <td class="co1">진라면</td>
-                            <td class="co2">3000</td>
-                        </tr>
-                        <tr>
-                            <td class="co1">진라면</td>
-                            <td class="co2">3000</td>
-                        </tr>
+                    <tbody id = "itemtbody">
+                        
                     </tbody>
                 </table>
 
@@ -98,6 +85,7 @@
             </div>
 
             <div class="ordercontent">
+                <div class="orderTable">
                 <table class="orderlist">
                     <thead>
                         <tr>
@@ -133,8 +121,27 @@
                             <td class="co3">2</td>
                             <td class="co4">삭제</td>
                         </tr>
+                        <tr>
+                            <td class="co1">불닭볶음면</td>
+                            <td class="co2">3500</td>
+                            <td class="co3">2</td>
+                            <td class="co4">삭제</td>
+                        </tr>
+                        <tr>
+                            <td class="co1">불닭볶음면</td>
+                            <td class="co2">3500</td>
+                            <td class="co3">2</td>
+                            <td class="co4">삭제</td>
+                        </tr>
+                        <tr>
+                            <td class="co1">불닭볶음면</td>
+                            <td class="co2">3500</td>
+                            <td class="co3">2</td>
+                            <td class="co4">삭제</td>
+                        </tr>
                     </tbody>
                 </table>
+                </div>
                 <div class="ordercalc">
                     <div>
                     <span class="totalpriceTitle">주문금액</span>
@@ -170,8 +177,7 @@
     </div>
     <!-- boxwrap -->
     </div>
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="./js/javascript.js"></script>
+    
     
 
 </body>
