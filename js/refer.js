@@ -315,7 +315,7 @@ $(document).on('click', '#itemnamelist li', function(){
 //검색기능때문에 안됨!
 $('#shoppingbutton').click(function(){
     //엑티브되어 있는 li의 item 인덱스값    //카테고리의 인덱스값도 알아야하나?
-    $('#won').show();
+    
     var categoryidx = $('#category li.active').index();     
     var orderidx = $('#itemnamelist li.active').index(); 
     addOrder(categoryidx, orderidx);

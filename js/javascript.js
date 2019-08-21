@@ -146,6 +146,45 @@ function itemcontent(a,b){
     document.getElementById('itemcontentprice').innerHTML= price + '원';
 };
 
+function addOrder(a,b){
+    var categoryName;
+    switch(a){
+        case 1 : categoryName = ramyun;
+        break;
+        case 2 : categoryName = friedrice;
+        break;
+        case 3 : categoryName = snack;
+        break;
+        case 4 : categoryName = drink;
+        break
+    }
+
+    var orderlistTbody = document.getElementById('orderlistTbody')
+    
+    newName = document.createTextNode(categoryName[b].name)
+    newPrice = document.createTextNode(categoryName[b].price)
+    selectBox = '<select name="amount" id="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'
+    deleteIcon = '<a href="#"><i class="fas fa-trash-alt"></i></a>'
+    
+    newTr = document.createElement('tr');
+    newTdName = document.createElement('td');
+    newTdPrice = document.createElement('td');
+    newTdSelect = document.createElement('td');
+    newTdDelete = document.createElement('td');
+    
+    newTdName.appendChild(newName);
+    newTdPrice.appendChild(newPrice);
+    newTdSelect.innerHTML = selectBox;
+    newTdDelete.innerHTML = deleteIcon;
+
+    newTr.appendChild(newTdName);
+    newTr.appendChild(newTdPrice);
+    newTr.appendChild(newTdSelect);
+    newTr.appendChild(newTdDelete);
+
+    orderlistTbody.appendChild(newTr);
+}
+
 window.onload = function(){
 
     // getCategory 함수정의
@@ -202,8 +241,14 @@ $(document).on('click', '#itemtbody tr', function(){
     //상품이름을 어디서 가져올 것인가? 카테고리 인덱스번호와 li의 인덱스 번호를 통해서
     // var ordernamelist='';
     // var orderpricelist='';
-    
-    
+    $('#shoppingbutton').click(function(){
+        $('#won').show();
+        var categoryidx = $('#category li.active').index();     
+        var orderidx = $('#itemtbody tr.active').index();
+        addOrder(categoryidx, orderidx);
+        
+    });
+    al
     
 });
 
