@@ -146,45 +146,6 @@ function itemcontent(a,b){
     document.getElementById('itemcontentprice').innerHTML= price + '원';
 };
 
-function addOrder(a,b){
-    var categoryName;
-    switch(a){
-        case 1 : categoryName = ramyun;
-        break;
-        case 2 : categoryName = friedrice;
-        break;
-        case 3 : categoryName = snack;
-        break;
-        case 4 : categoryName = drink;
-        break
-    }
-
-    var orderlistTbody = document.getElementById('orderlistTbody')
-    
-    newName = document.createTextNode(categoryName[b].name)
-    newPrice = document.createTextNode(categoryName[b].price)
-    selectBox = '<select name="amount" id="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'
-    deleteIcon = '<a href="#"><i class="fas fa-trash-alt"></i></a>'
-    
-    newTr = document.createElement('tr');
-    newTdName = document.createElement('td');
-    newTdPrice = document.createElement('td');
-    newTdSelect = document.createElement('td');
-    newTdDelete = document.createElement('td');
-    
-    newTdName.appendChild(newName);
-    newTdPrice.appendChild(newPrice);
-    newTdSelect.innerHTML = selectBox;
-    newTdDelete.innerHTML = deleteIcon;
-
-    newTr.appendChild(newTdName);
-    newTr.appendChild(newTdPrice);
-    newTr.appendChild(newTdSelect);
-    newTr.appendChild(newTdDelete);
-
-    orderlistTbody.appendChild(newTr);
-}
-
 window.onload = function(){
 
     // getCategory 함수정의
@@ -221,6 +182,68 @@ window.onload = function(){
     });
     
     
+    };
+
+    function addOrder(a,b){
+        var categoryName;
+        switch(a){
+            case 1 : categoryName = ramyun;
+            break;
+            case 2 : categoryName = friedrice;
+            break;
+            case 3 : categoryName = snack;
+            break;
+            case 4 : categoryName = drink;
+            break
+        }
+    
+        var orderlistTbody = document.getElementById('orderlistTbody')
+        
+        newName = document.createTextNode(categoryName[b].name)
+        newPrice = document.createTextNode(categoryName[b].price)
+        selectBox = '<select name="amount" id="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'
+        deleteIcon = '<a href="#"><i class="fas fa-trash-alt"></i></a>'
+        
+        newTr = document.createElement('tr');
+        newTdName = document.createElement('td');
+        newTdPrice = document.createElement('td');
+        newTdSelect = document.createElement('td');
+        newTdDelete = document.createElement('td');
+        newTdDelete.classList.add('delete');
+
+        newTdName.appendChild(newName);
+        newTdPrice.appendChild(newPrice);
+        newTdSelect.innerHTML = selectBox;
+        newTdDelete.innerHTML = deleteIcon;
+    
+        newTr.appendChild(newTdName);
+        newTr.appendChild(newTdPrice);
+        newTr.appendChild(newTdSelect);
+        newTr.appendChild(newTdDelete);
+    
+        orderlistTbody.appendChild(newTr);
+    }
+
+    var select = document.getElementById('amount');
+    var TotalPrice = 0;
+    function addAmount(a,b){
+
+        var categoryName;
+        switch(a){
+            case 1 : categoryName = ramyun;
+            break;
+            case 2 : categoryName = friedrice;
+            break;
+            case 3 : categoryName = snack;
+            break;
+            case 4 : categoryName = drink;
+            break
+        }         
+    // alert(select.options[select.selectedIndex].value);
+    // var selectValue = select.options[select.selectedIndex].value;
+    AddPrice = categoryName[b].price;
+    TotalPrice += AddPrice;
+    document.getElementById('totalprice').innerHTML=TotalPrice        
     }
 
     
@@ -241,15 +264,42 @@ $(document).on('click', '#itemtbody tr', function(){
     //상품이름을 어디서 가져올 것인가? 카테고리 인덱스번호와 li의 인덱스 번호를 통해서
     // var ordernamelist='';
     // var orderpricelist='';
-    $('#shoppingbutton').click(function(){
-        $('#won').show();
-        var categoryidx = $('#category li.active').index();     
-        var orderidx = $('#itemtbody tr.active').index();
-        addOrder(categoryidx, orderidx);
-        
-    });
-    al
+   
+
     
 });
 
+$(document).on('click', '#shoppingbutton', function(){
+    var categoryidx = $('#category li.active').index();     
+    var orderidx = $('#itemtbody tr.active').index();
+    addOrder(categoryidx, orderidx);
+    addAmount(categoryidx, orderidx);
+})
+// $('#shoppingbutton').click(function(){
+//     // $('#won').show();
+//     var categoryidx = $('#category li.active').index();     
+//     var orderidx = $('#itemtbody tr.active').index();
+//     addOrder(categoryidx, orderidx);
+    
+// });
 
+
+function deleteOrder(a){
+    var orderlistTbody = document.getElementById('orderlistTbody')
+    orderlistTbody.removeChild(orderlistTbody.childNodes[a])
+
+};
+
+//첫번째 항목은 두번 클릭해야 삭제가된다.   //여전히 그렇다.
+$(document).on('click', '.delete', function(){
+    var deleteidx = $(this).parent('tr').index();
+    deleteOrder(deleteidx);
+   });
+
+$('#orderbutton').click(function(){
+    if(confirm('주문하신 내역은\n 불닭볶음면 1, 레몬에이드2 입니다.\n 거스름돈은 3000원 입니다.') == true){
+        alert('주문이 완료되었습니다')
+    }else(
+        alert('주문이 취소되었습니다')
+    )
+});
