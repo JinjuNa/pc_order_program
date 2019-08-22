@@ -263,7 +263,7 @@ a{
 
 .orderTable{
     height: 240px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 
