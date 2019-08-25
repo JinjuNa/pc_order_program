@@ -139,13 +139,18 @@ a{
     width:70%;
 }
 
-.item .coName.active{
+/* .item .coName.active{
     background-color: #ddd;
 }
 
 .item .coPrice.active{
     background-color: #ddd;
-}
+} */
+
+/* 
+#itemtbody tr.active{
+    background-color:red;
+} */
 
 .itemcontent{
     width:30%;
@@ -320,4 +325,8 @@ a{
     background-color: #666;
     border:none;
     color:#fff;
+}
+
+#paymentdiv{
+    display: none;
 }

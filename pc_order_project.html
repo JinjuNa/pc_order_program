@@ -90,13 +90,14 @@
                     </div>
                     <div>
                         <span class="paymentTitle">지불방법</span>
-                        <input type="radio" name="payment" value="현금">현금
-                        <input type="radio" name="payment" value="카드">카드
+                        <input type="radio" name="payment" value="카드" checked="checked" >카드
+                        <input type="radio" name="payment" value="현금" >현금
+                        
 
                     </div>
-                    <div>
+                    <div id="paymentdiv">
                     <span class="paymentamountTitle">지불금액</span>
-                    <span class="paymentamount"> <input type="text"></span><span class="won">원</span>
+                    <span class="paymentamount"> <input type="text" id="paymoney" onkeypress="inNumber();"></span><span class="won">원</span>
                     </div>
                     <!-- <div>
                     <span class="changeTitle">거스름돈</span>
