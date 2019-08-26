@@ -347,21 +347,37 @@ $('input[type=radio][name=payment]').change(function() {
     }
 });
 
-//input박스에 숫자이외의 문자 입력방지기능 넣고싶은데 안먹힘..
-function inNumber(){
-    if(event.keyCode<48 || event.keyCode>57){
-       event.returnValue=false;
+$('#orderbutton').click(function(){
+    //현금.카드 중에 체크된 박스의 value를 가져고오고 싶다.
+    var paycheckbox = document.getElementsByName('payment')
+    var paymoney = document.getElementById("paymoney").value;
+    var retrunmoney = paymoney - TotalPrice;
+
+    if(paycheckbox[0].checked == true){
+
+        if(confirm('주문하신 내역은\n 불닭볶음면 1, 레몬에이드 2 입니다.') == true){
+            alert('주문이 완료되었습니다')
+        }else{
+            alert('주문이 취소되었습니다')
+        }
+    }else{
+        
+        if(paymoney < TotalPrice){
+            alert("지불금액이 주문금액보다 작습니다. 다시 입력해주세요.")
+        }else{
+            if(confirm('주문하신 내역은\n 불닭볶음면 1, 레몬에이드 2 입니다.\n 거스름돈은' + retrunmoney + '원 입니다.') == true){
+                alert('주문이 완료되었습니다')
+            }else{
+                alert('주문이 취소되었습니다')
+            }
+        }
     }
-  }
+
+    
+})
+
+
 });
 
 
 
-$('#orderbutton').click(function(){
-
-    if(confirm('주문하신 내역은\n 불닭볶음면 1, 레몬에이드2 입니다.\n 거스름돈은 3000원 입니다.') == true){
-        alert('주문이 완료되었습니다')
-    }else{
-        alert('주문이 취소되었습니다')
-    }
-})
