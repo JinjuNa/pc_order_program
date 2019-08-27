@@ -253,8 +253,9 @@ window.onload = function(){
         if($('.'+ Ename).length == 0){
             addOrder(a, b);
         }else{
-            var value = Number($('.' + Ename + ' select').val()) + 1;
-            $('.' + Ename + ' select').val(value)
+            var value = Number($('.' + Ename + ' select').val());
+            
+            $('.' + Ename + ' select').val(value+1)
         }
 
 
@@ -286,12 +287,16 @@ window.onload = function(){
     //orderlistTbody에 있는 여러개의 tr중에
     //deleteidx 번째 tr의 2번째 td의 값을 가져오고싶다.
     //deleteidx는 a로가져올것이다.
+
+    //value
     var orderlistTbody = document.getElementById('orderlistTbody');
     
     DeleteTr = orderlistTbody.getElementsByTagName('tr')[a];
     DeletePrice = DeleteTr.getElementsByTagName('td')[1].innerHTML;
-    alert(DeletePrice);
-    TotalPrice -= DeletePrice;
+    DeleteValue = DeleteTr.getElementsByTagName('select')[0].value;
+    // alert(DeleteValue);
+    // alert(DeletePrice);
+    TotalPrice -= DeletePrice*DeleteValue;
     document.getElementById('totalprice').innerHTML=TotalPrice
     
 }
@@ -348,37 +353,14 @@ $(document).on('click', '.delete', function(){
     
    });
 
-   //만약 현금결제인데 주문금액이 지불금액보다 크다면 --> "지불금액이 주문금액보다 작습니다. 다시 입력해주세요."
-// $('#orderbutton').click(function(){
-//     // var paymentvalue = $('input[type=radio][name=payment]').value;
-//     // var paymoney = document.getElementById("paymoney").value;
-//     // alert(paymoney);
-//     // alert("안녕하세요")
-//     // if(paymentvalue == '현금'){
-//     //     if(){}
-//     // }
-//     // else{
-//         if(confirm('주문하신 내역은\n 불닭볶음면 1, 레몬에이드2 입니다.\n 현금결제, 거스름돈은 3000원 입니다.') == true){
-//             alert('주문이 완료되었습니다')
-//         }else{
-//             alert('주문이 취소되었습니다')
-//         }
-//     // }
-    
-// });
-
-
-
 
 
 $(document).ready(function () {
 $('input[type=radio][name=payment]').change(function() {
     if (this.value == '현금') {
-        // alert("현금을 선택하셨습니다.");
         $('#paymentdiv').show();
     }
     else if (this.value == '카드') {
-        // alert("카드를 선택하셨습니다.");
         $('#paymentdiv').hide();
 
     }
