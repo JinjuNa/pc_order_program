@@ -6,6 +6,7 @@ var ramyun = [
         num : 1,
         categoryNum : 1,
         name : '불닭볶음면',
+        Ename : 'buldark',
         'detail' : '화끈한 라면',
         'price' : 3500,
         'image' : 'buldark.jpg',
@@ -15,6 +16,7 @@ var ramyun = [
         num : 2,
         categoryNum : 1,
         name : '진라면',
+        Ename : 'jinramyun',
         'detail' : '국민이 사랑하는 라면',
         'price' : 3000,
         'image' : 'jinramyun.jpg',
@@ -28,6 +30,7 @@ var friedrice = [
         num : 3,
         categoryNum : 2,
         name : '새우볶음밥',
+        Ename : 'shrimpfriedrice',
         'detail' : '새우가 살아있는 볶음밥',
         'price' : 5000,
         'image' : 'shrimpfriedrice.jpg',
@@ -37,6 +40,7 @@ var friedrice = [
         num : 4,
         categoryNum : 2,
         name : '김치볶음밥',
+        Ename : 'kimchifriedrice',
         'detail' : '직접 담근 김치로 만든 김치볶음밥',
         'price' : 6000,
         'image' : 'kimchifriedrice.jpg',
@@ -50,6 +54,7 @@ var snack = [
         num : 5,
         categoryNum : 3,
         name : '새우깡',
+        Ename : 'shrimpsnack',
         'detail' : '손이가요 손이가',
         'price' : 2000,
         'image' : 'shrimpsnack.jpg',
@@ -59,6 +64,7 @@ var snack = [
         num : 6,
         categoryNum : 3,
         name : '고래밥',
+        Ename : 'whalesnack',
         'detail' : '고소한 고래밥',
         'price' : 2000,
         'image' : 'whalesnack.jpg',
@@ -68,6 +74,7 @@ var snack = [
         num : 7,
         categoryNum : 3,
         name : '감자깡',
+        Ename : 'photatosnack',
         'detail' : '감자 향이 솔솔',
         'price' : 2000,
         'image' : 'photatosnack.jpg',
@@ -81,6 +88,7 @@ var drink = [
         num : 8,
         categoryNum : 4,
         name : '콜라',
+        Ename : 'cola',
         'detail' : '속이 뻥 시원한 콜라',
         'price' : 1000,
         'image' : 'cola.jpg',
@@ -90,6 +98,7 @@ var drink = [
         num : 9,
         categoryNum : 4,
         name : '레몬에이드',
+        Ename : 'lemonade',
         'detail' : '상큼한 레몬향 에이드',
         'price' : 3000,
         'image' : 'lemonade.jpg',
@@ -99,6 +108,7 @@ var drink = [
         num : 10,
         categoryNum : 4,
         name : '물',
+        Ename : 'water',
         'detail' : '생수',
         'price' : 1000,
         'image' : 'water.jpg',
@@ -201,10 +211,11 @@ window.onload = function(){
         
         newName = document.createTextNode(categoryName[b].name)
         newPrice = document.createTextNode(categoryName[b].price)
-        selectBox = '<select name="amount" id="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'
+        selectBox = '<select name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'
         deleteIcon = '<a href="#"><i class="fas fa-trash-alt"></i></a>'
         
-        newTr = document.createElement('tr');
+        newTr = document.createElement('tr')
+        newTr.classList.add(categoryName[b].Ename);
         newTdName = document.createElement('td');
         newTdPrice = document.createElement('td');
         newTdSelect = document.createElement('td');
@@ -224,7 +235,32 @@ window.onload = function(){
         orderlistTbody.appendChild(newTr);
     }
 
-    var select = document.getElementById('amount');
+    function addValue(a,b){
+        var categoryName;
+        switch(a){
+            case 1 : categoryName = ramyun;
+            break;
+            case 2 : categoryName = friedrice;
+            break;
+            case 3 : categoryName = snack;
+            break;
+            case 4 : categoryName = drink;
+            break
+        }
+
+        var Ename=categoryName[b].Ename;
+
+        if($('.'+ Ename).length == 0){
+            addOrder(a, b);
+        }else{
+            var value = Number($('.' + Ename + ' select').val()) + 1;
+            $('.' + Ename + ' select').val(value)
+        }
+
+
+    }
+
+    // var select = document.getElementsByName('amount')[0];
     var TotalPrice = 0;
     function addAmount(a,b){
 
@@ -258,7 +294,7 @@ window.onload = function(){
     TotalPrice -= DeletePrice;
     document.getElementById('totalprice').innerHTML=TotalPrice
     
-    }
+}
     
 $(document).on('click', '#itemtbody tr', function(){
     $(this).siblings().removeClass("active")
@@ -285,7 +321,8 @@ $(document).on('click', '#itemtbody tr', function(){
 $(document).on('click', '#shoppingbutton', function(){
     var categoryidx = $('#category li.active').index();     
     var orderidx = $('#itemtbody tr.active').index();
-    addOrder(categoryidx, orderidx);
+    
+    addValue(categoryidx, orderidx)
     addAmount(categoryidx, orderidx);
 })
 // $('#shoppingbutton').click(function(){
