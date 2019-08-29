@@ -365,16 +365,44 @@ $('input[type=radio][name=payment]').change(function() {
 
     }
 });
+$('select').change(function() {alert($(this).val())}) 
+    
+// $('select[name=amount]').focus(function(){
+//     var originalval = $(this).val();
+// }).change(function(){
+//     var changeval = $(this).val();
+
+//     alert('이전값 : ' + originalval + '이후값 : ' + changeval);
+// })
 
 $('#orderbutton').click(function(){
     //현금.카드 중에 체크된 박스의 value를 가져고오고 싶다.
     var paycheckbox = document.getElementsByName('payment')
     var paymoney = document.getElementById("paymoney").value;
     var retrunmoney = paymoney - TotalPrice;
+    var orderlistId = document.getElementById('orderlistTbody')
+    var len = $("#orderlistTbody tr").length;
+
+    var orderlist='';
+    // var orderlistIdtr = orderlistId.getElementsByTagName('tr')[0];
+    // var orderlistname = orderlistIdtr.getElementsByTagName('td')[0].innerHTML;
+    // var orderlistvalue = orderlistIdtr.getElementsByTagName('select')[0].value;
+    // var order = orderlistname + ' ' + orderlistvalue;
+    // orderlist += order
+
+    
+    for(var i=0; i<len; i++){
+        var orderlistIdtr = orderlistId.getElementsByTagName('tr')[i];
+        var orderlistname = orderlistIdtr.getElementsByTagName('td')[0].innerHTML;
+        var orderlistvalue = orderlistIdtr.getElementsByTagName('select')[0].value;
+        var order = orderlistname + ' ' + orderlistvalue;
+        orderlist += order
+    };
+    alert(orderlist);
 
     if(paycheckbox[0].checked == true){
 
-        if(confirm('주문하신 내역은\n 불닭볶음면 1, 레몬에이드 2 입니다.') == true){
+        if(confirm('주문하신 내역은\n' +orderlist + '입니다.') == true){
             alert('주문이 완료되었습니다')
         }else{
             alert('주문이 취소되었습니다')
@@ -384,7 +412,7 @@ $('#orderbutton').click(function(){
         if(paymoney < TotalPrice){
             alert("지불금액이 주문금액보다 작습니다. 다시 입력해주세요.")
         }else{
-            if(confirm('주문하신 내역은\n 불닭볶음면 1, 레몬에이드 2 입니다.\n 거스름돈은' + retrunmoney + '원 입니다.') == true){
+            if(confirm('주문하신 내역은\n' +orderlist + '입니다.\n 거스름돈은' + retrunmoney + '원 입니다.') == true){
                 alert('주문이 완료되었습니다')
             }else{
                 alert('주문이 취소되었습니다')
