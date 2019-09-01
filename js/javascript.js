@@ -158,6 +158,8 @@ function itemcontent(a,b){
 
 window.onload = function(){
 
+     
+
     // getCategory 함수정의
 
     function getCategory(){
@@ -211,7 +213,7 @@ window.onload = function(){
         
         newName = document.createTextNode(categoryName[b].name)
         newPrice = document.createTextNode(categoryName[b].price)
-        selectBox = '<select name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'
+        selectBox = '<select id="'+categoryName[b].Ename+'"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'
         deleteIcon = '<a href="#"><i class="fas fa-trash-alt"></i></a>'
         
         newTr = document.createElement('tr')
@@ -261,45 +263,61 @@ window.onload = function(){
 
     }
 
-    // var select = document.getElementsByName('amount')[0];
-    var TotalPrice = 0;
-    function addAmount(a,b){
+    function updateAmount(){
+        var NewTotalPrice = 0;
+        var len = $("#orderlistTbody tr").length;
+        var orderlistTbody = document.getElementById('orderlistTbody')
 
-        var categoryName;
-        switch(a){
-            case 1 : categoryName = ramyun;
-            break;
-            case 2 : categoryName = friedrice;
-            break;
-            case 3 : categoryName = snack;
-            break;
-            case 4 : categoryName = drink;
-            break
-        }         
-    // alert(select.options[select.selectedIndex].value);
-    // var selectValue = select.options[select.selectedIndex].value;
-    AddPrice = categoryName[b].price;
-    TotalPrice += AddPrice;
-    document.getElementById('totalprice').innerHTML=TotalPrice        
+        for(var i=0; i<len; i++){
+            var selectTr = orderlistTbody.getElementsByTagName('tr')[i]
+            var p = selectTr.getElementsByTagName('td')[1].innerHTML;
+            var v = selectTr.getElementsByTagName('select')[0].value;
+            NewTotalPrice += p*v;
+        }
+        document.getElementById('totalprice').innerHTML=NewTotalPrice
+        // console.log(NewTotalPrice);
+        
     }
 
-    function deleteAmount(a){
-    //orderlistTbody에 있는 여러개의 tr중에
-    //deleteidx 번째 tr의 2번째 td의 값을 가져오고싶다.
-    //deleteidx는 a로가져올것이다.
+    // var select = document.getElementsByName('amount')[0];
+    // var TotalPrice = 0;
+    // function addAmount(a,b){
 
-    //value
-    var orderlistTbody = document.getElementById('orderlistTbody');
+    //     var categoryName;
+    //     switch(a){
+    //         case 1 : categoryName = ramyun;
+    //         break;
+    //         case 2 : categoryName = friedrice;
+    //         break;
+    //         case 3 : categoryName = snack;
+    //         break;
+    //         case 4 : categoryName = drink;
+    //         break
+    //     }         
+    // // alert(select.options[select.selectedIndex].value);
+    // // var selectValue = select.options[select.selectedIndex].value;
+    // AddPrice = categoryName[b].price;
+    // TotalPrice += AddPrice;
+    // document.getElementById('totalprice').innerHTML=TotalPrice        
+    // }
+
+    // function deleteAmount(a){
+    // //orderlistTbody에 있는 여러개의 tr중에
+    // //deleteidx 번째 tr의 2번째 td의 값을 가져오고싶다.
+    // //deleteidx는 a로가져올것이다.
+
+    // //value
+    // var orderlistTbody = document.getElementById('orderlistTbody');
     
-    DeleteTr = orderlistTbody.getElementsByTagName('tr')[a];
-    DeletePrice = DeleteTr.getElementsByTagName('td')[1].innerHTML;
-    DeleteValue = DeleteTr.getElementsByTagName('select')[0].value;
-    // alert(DeleteValue);
-    // alert(DeletePrice);
-    TotalPrice -= DeletePrice*DeleteValue;
-    document.getElementById('totalprice').innerHTML=TotalPrice
+    // DeleteTr = orderlistTbody.getElementsByTagName('tr')[a];
+    // DeletePrice = DeleteTr.getElementsByTagName('td')[1].innerHTML;
+    // DeleteValue = DeleteTr.getElementsByTagName('select')[0].value;
+    // // alert(DeleteValue);
+    // // alert(DeletePrice);
+    // TotalPrice -= DeletePrice*DeleteValue;
+    // document.getElementById('totalprice').innerHTML=TotalPrice
     
-}
+    // }
     
 $(document).on('click', '#itemtbody tr', function(){
     $(this).siblings().removeClass("active")
@@ -328,7 +346,17 @@ $(document).on('click', '#shoppingbutton', function(){
     var orderidx = $('#itemtbody tr.active').index();
     
     addValue(categoryidx, orderidx)
-    addAmount(categoryidx, orderidx);
+    // addAmount(categoryidx, orderidx);
+    updateAmount();
+
+    // $('select').change(function(){});
+    
+    
+})
+
+$(document).on('change', 'select', function(){
+    updateAmount();
+    // alert('나 바뀜')
 })
 // $('#shoppingbutton').click(function(){
 //     // $('#won').show();
@@ -348,14 +376,17 @@ function deleteOrder(a){
 //첫번째 항목은 두번 클릭해야 삭제가된다.   //여전히 그렇다.
 $(document).on('click', '.delete', function(){
     var deleteidx = $(this).parent('tr').index();
-    deleteAmount(deleteidx);
+    // deleteAmount(deleteidx);
     deleteOrder(deleteidx);
+    updateAmount();
     
    });
 
 
 
 $(document).ready(function () {
+    
+    
 $('input[type=radio][name=payment]').change(function() {
     if (this.value == '현금') {
         $('#paymentdiv').show();
@@ -365,7 +396,8 @@ $('input[type=radio][name=payment]').change(function() {
 
     }
 });
-$('select').change(function() {alert($(this).val())}) 
+
+
     
 // $('select[name=amount]').focus(function(){
 //     var originalval = $(this).val();
@@ -376,21 +408,16 @@ $('select').change(function() {alert($(this).val())})
 // })
 
 $('#orderbutton').click(function(){
+    
     //현금.카드 중에 체크된 박스의 value를 가져고오고 싶다.
     var paycheckbox = document.getElementsByName('payment')
     var paymoney = document.getElementById("paymoney").value;
-    var retrunmoney = paymoney - TotalPrice;
+    var FinalPrice = document.getElementById('totalprice').innerHTML
+    var retrunmoney = paymoney - FinalPrice;
     var orderlistId = document.getElementById('orderlistTbody')
     var len = $("#orderlistTbody tr").length;
 
-    var orderlist='';
-    // var orderlistIdtr = orderlistId.getElementsByTagName('tr')[0];
-    // var orderlistname = orderlistIdtr.getElementsByTagName('td')[0].innerHTML;
-    // var orderlistvalue = orderlistIdtr.getElementsByTagName('select')[0].value;
-    // var order = orderlistname + ' ' + orderlistvalue;
-    // orderlist += order
-
-    
+    var orderlist='';  
     for(var i=0; i<len; i++){
         var orderlistIdtr = orderlistId.getElementsByTagName('tr')[i];
         var orderlistname = orderlistIdtr.getElementsByTagName('td')[0].innerHTML;
@@ -398,7 +425,9 @@ $('#orderbutton').click(function(){
         var order = orderlistname + ' ' + orderlistvalue;
         orderlist += order
     };
-    alert(orderlist);
+    // alert(orderlist);
+
+    
 
     if(paycheckbox[0].checked == true){
 
@@ -409,7 +438,7 @@ $('#orderbutton').click(function(){
         }
     }else{
         
-        if(paymoney < TotalPrice){
+        if(paymoney < FinalPrice){
             alert("지불금액이 주문금액보다 작습니다. 다시 입력해주세요.")
         }else{
             if(confirm('주문하신 내역은\n' +orderlist + '입니다.\n 거스름돈은' + retrunmoney + '원 입니다.') == true){
