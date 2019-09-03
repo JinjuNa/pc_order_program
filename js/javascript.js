@@ -194,7 +194,7 @@ window.onload = function(){
     });
     
     
-    };
+};
 
     function addOrder(a,b){
         var categoryName;
@@ -213,7 +213,7 @@ window.onload = function(){
         
         newName = document.createTextNode(categoryName[b].name)
         newPrice = document.createTextNode(categoryName[b].price)
-        selectBox = '<select id="'+categoryName[b].Ename+'"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'
+        selectBox = '<select name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'
         deleteIcon = '<a href="#"><i class="fas fa-trash-alt"></i></a>'
         
         newTr = document.createElement('tr')
@@ -279,45 +279,6 @@ window.onload = function(){
         
     }
 
-    // var select = document.getElementsByName('amount')[0];
-    // var TotalPrice = 0;
-    // function addAmount(a,b){
-
-    //     var categoryName;
-    //     switch(a){
-    //         case 1 : categoryName = ramyun;
-    //         break;
-    //         case 2 : categoryName = friedrice;
-    //         break;
-    //         case 3 : categoryName = snack;
-    //         break;
-    //         case 4 : categoryName = drink;
-    //         break
-    //     }         
-    // // alert(select.options[select.selectedIndex].value);
-    // // var selectValue = select.options[select.selectedIndex].value;
-    // AddPrice = categoryName[b].price;
-    // TotalPrice += AddPrice;
-    // document.getElementById('totalprice').innerHTML=TotalPrice        
-    // }
-
-    // function deleteAmount(a){
-    // //orderlistTbody에 있는 여러개의 tr중에
-    // //deleteidx 번째 tr의 2번째 td의 값을 가져오고싶다.
-    // //deleteidx는 a로가져올것이다.
-
-    // //value
-    // var orderlistTbody = document.getElementById('orderlistTbody');
-    
-    // DeleteTr = orderlistTbody.getElementsByTagName('tr')[a];
-    // DeletePrice = DeleteTr.getElementsByTagName('td')[1].innerHTML;
-    // DeleteValue = DeleteTr.getElementsByTagName('select')[0].value;
-    // // alert(DeleteValue);
-    // // alert(DeletePrice);
-    // TotalPrice -= DeletePrice*DeleteValue;
-    // document.getElementById('totalprice').innerHTML=TotalPrice
-    
-    // }
     
 $(document).on('click', '#itemtbody tr', function(){
     $(this).siblings().removeClass("active")
@@ -328,17 +289,6 @@ $(document).on('click', '#itemtbody tr', function(){
     var categoryidx = $('#category li.active').index(); 
     itemcontent(categoryidx,itemidx)
     $('.shoppingicon').show();
-
-
-    //장바구니 버튼 클릭했을때 주문목록에 상품정보띄우기
-    
-    //shopping button을 눌렀을때, 지금 #itemlist li중 엑티브 클래스가 붙은 아이의 상품이름과 가격을 주문목록에 추가시키고 싶다.
-    //상품이름을 어디서 가져올 것인가? 카테고리 인덱스번호와 li의 인덱스 번호를 통해서
-    // var ordernamelist='';
-    // var orderpricelist='';
-   
-
-    
 });
 
 $(document).on('click', '#shoppingbutton', function(){
@@ -346,34 +296,25 @@ $(document).on('click', '#shoppingbutton', function(){
     var orderidx = $('#itemtbody tr.active').index();
     
     addValue(categoryidx, orderidx)
-    // addAmount(categoryidx, orderidx);
     updateAmount();
-
-    // $('select').change(function(){});
     
     
 })
 
 $(document).on('change', 'select', function(){
     updateAmount();
-    // alert('나 바뀜')
 })
-// $('#shoppingbutton').click(function(){
-//     // $('#won').show();
-//     var categoryidx = $('#category li.active').index();     
-//     var orderidx = $('#itemtbody tr.active').index();
-//     addOrder(categoryidx, orderidx);
-    
-// });
 
 
 function deleteOrder(a){
-    var orderlistTbody = document.getElementById('orderlistTbody')
+    var orderlistTbody = document.getElementById('orderlistTbody')  
     orderlistTbody.removeChild(orderlistTbody.childNodes[a])
 
 };
 
 //첫번째 항목은 두번 클릭해야 삭제가된다.   //여전히 그렇다.
+//첫번째 deleteidx = 0 일때 다른childnodes가 삭제가되나?
+
 $(document).on('click', '.delete', function(){
     var deleteidx = $(this).parent('tr').index();
     // deleteAmount(deleteidx);
@@ -396,16 +337,6 @@ $('input[type=radio][name=payment]').change(function() {
 
     }
 });
-
-
-    
-// $('select[name=amount]').focus(function(){
-//     var originalval = $(this).val();
-// }).change(function(){
-//     var changeval = $(this).val();
-
-//     alert('이전값 : ' + originalval + '이후값 : ' + changeval);
-// })
 
 $('#orderbutton').click(function(){
     
