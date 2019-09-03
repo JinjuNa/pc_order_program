@@ -4,27 +4,10 @@ window.onload = function(){
     //getCategory 함수사용
     getCategory();
 
-
-    function categoryFunc(a){
-        var categoryName;
-        switch(a){
-            case 1 : categoryName = ramyun;
-            break;
-            case 2 : categoryName = friedrice;
-            break;
-            case 3 : categoryName = snack;
-            break;
-            case 4 : categoryName = drink;
-            break
-        }
-        return categoryName;
-    }
-
     $('#category li').click(function(){
-        
         $(this).siblings().removeClass("active")
         $(this).addClass("active")
-        var categoryidx = $('#category li.active').index() +1; 
+        var categoryidx = $('#category li.active').index(); 
         var categoryNum = categoryFunc(categoryidx);
         itemNameList(categoryNum);
     })
@@ -43,11 +26,8 @@ window.onload = function(){
     $(document).on('click', '#shoppingbutton', function(){
         var categoryidx = $('#category li.active').index();     
         var orderidx = $('#itemtbody tr.active').index();
-        
         addValue(categoryidx, orderidx)
         updateAmount();
-        
-        
     })
     
     $(document).on('change', 'select', function(){
@@ -61,7 +41,6 @@ window.onload = function(){
         var deleteidx = $(this).parent('tr').index();
         deleteOrder(deleteidx);
         updateAmount();
-        
     });
 
     $('input[type=radio][name=payment]').change(function() {
@@ -70,12 +49,10 @@ window.onload = function(){
         }
         else if (this.value == '카드') {
             $('#paymentdiv').hide();
-    
         }
     });
     
     $('#orderbutton').click(function(){
-        
         //현금.카드 중에 체크된 박스의 value를 가져고오고 싶다.
         var paycheckbox = document.getElementsByName('payment')
         var paymoney = document.getElementById("paymoney").value;
@@ -83,7 +60,6 @@ window.onload = function(){
         var retrunmoney = paymoney - FinalPrice;
         var orderlistId = document.getElementById('orderlistTbody')
         var len = $("#orderlistTbody tr").length;
-    
         var orderlist='';  
         for(var i=0; i<len; i++){
             var orderlistIdtr = orderlistId.getElementsByTagName('tr')[i];
@@ -92,19 +68,14 @@ window.onload = function(){
             var order = orderlistname + ' ' + orderlistvalue;
             orderlist += order
         };
-        // alert(orderlist);
-    
-        
-    
+
         if(paycheckbox[0].checked == true){
-    
             if(confirm('주문하신 내역은\n' +orderlist + '입니다.') == true){
                 alert('주문이 완료되었습니다')
             }else{
                 alert('주문이 취소되었습니다')
             }
         }else{
-            
             if(paymoney < FinalPrice){
                 alert("지불금액이 주문금액보다 작습니다. 다시 입력해주세요.")
             }else{
@@ -148,7 +119,6 @@ function itemNameList(a){
         itemList += '<tr><td>' + a[i].name +'</td><td>'+ a[i].price+'</td></tr>';
     }
     document.getElementById('itemtbody').innerHTML=itemList;
-    
 };
 
 //itemcontent 보이기
@@ -165,7 +135,6 @@ function itemcontent(a,b){
 };
 
  // getCategory 함수정의
-
 function getCategory(){
     var category = ['전체메뉴', '라면류', '볶음밥류', '과자류', '음료류'];
     var show='';    
@@ -176,7 +145,6 @@ function getCategory(){
 };
 
 //addOrder 함수
-
 function addOrder(a,b){
     var categoryName = categoryFunc(a);
     var orderlistTbody = document.getElementById('orderlistTbody')
@@ -210,23 +178,18 @@ function addOrder(a,b){
 function addValue(a,b){
     var categoryName = categoryFunc(a);
     var Ename=categoryName[b].Ename;
-
     if($('.'+ Ename).length == 0){
         addOrder(a, b);
     }else{
         var value = Number($('.' + Ename + ' select').val());
-        
         $('.' + Ename + ' select').val(value+1)
     }
-
-
 }
 
 function updateAmount(){
     var NewTotalPrice = 0;
     var len = $("#orderlistTbody tr").length;
     var orderlistTbody = document.getElementById('orderlistTbody')
-
     for(var i=0; i<len; i++){
         var selectTr = orderlistTbody.getElementsByTagName('tr')[i]
         var p = selectTr.getElementsByTagName('td')[1].innerHTML;
@@ -239,7 +202,6 @@ function updateAmount(){
 function deleteOrder(a){
     var orderlistTbody = document.getElementById('orderlistTbody')  
     orderlistTbody.removeChild(orderlistTbody.childNodes[a])
-
 };
 
 
