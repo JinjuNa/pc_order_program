@@ -5,23 +5,29 @@ window.onload = function(){
     getCategory();
 
 
+    function categoryFunc(a){
+        var categoryName;
+        switch(a){
+            case 1 : categoryName = ramyun;
+            break;
+            case 2 : categoryName = friedrice;
+            break;
+            case 3 : categoryName = snack;
+            break;
+            case 4 : categoryName = drink;
+            break
+        }
+        return categoryName;
+    }
+
     $('#category li').click(function(){
+        
         $(this).siblings().removeClass("active")
         $(this).addClass("active")
-        
+        var categoryidx = $('#category li.active').index() +1; 
+        var categoryNum = categoryFunc(categoryidx);
+        itemNameList(categoryNum);
     })
-    $('#category li:nth-child(2)').click(function(){
-        itemNameList(ramyun);
-    });
-    $('#category li:nth-child(3)').click(function(){
-        itemNameList(friedrice);
-    });
-    $('#category li:nth-child(4)').click(function(){
-        itemNameList(snack);
-    });
-    $('#category li:nth-child(5)').click(function(){
-        itemNameList(drink);
-    });
     
     $(document).on('click', '#itemtbody tr', function(){
         $(this).siblings().removeClass("active")
@@ -120,6 +126,21 @@ window.onload = function(){
 
 //함수정의
 
+function categoryFunc(a){
+    var categoryName;
+    switch(a){
+        case 1 : categoryName = ramyun;
+        break;
+        case 2 : categoryName = friedrice;
+        break;
+        case 3 : categoryName = snack;
+        break;
+        case 4 : categoryName = drink;
+        break
+    }
+    return categoryName;
+}
+
 //라면류 보이기
 function itemNameList(a){
     var itemList = '';
@@ -132,17 +153,7 @@ function itemNameList(a){
 
 //itemcontent 보이기
 function itemcontent(a,b){
-    var categoryName;
-    switch(a){
-        case 1 : categoryName = ramyun;
-        break;
-        case 2 : categoryName = friedrice;
-        break;
-        case 3 : categoryName = snack;
-        break;
-        case 4 : categoryName = drink;
-        break
-    }
+    var categoryName = categoryFunc(a);
     var image = '<img src="./img/item/' +categoryName[b].image + '">'
     var name = categoryName[b].name;
     var detail = categoryName[b].detail;
@@ -167,18 +178,7 @@ function getCategory(){
 //addOrder 함수
 
 function addOrder(a,b){
-    var categoryName;
-    switch(a){
-        case 1 : categoryName = ramyun;
-        break;
-        case 2 : categoryName = friedrice;
-        break;
-        case 3 : categoryName = snack;
-        break;
-        case 4 : categoryName = drink;
-        break
-    }
-
+    var categoryName = categoryFunc(a);
     var orderlistTbody = document.getElementById('orderlistTbody')
     
     newName = document.createTextNode(categoryName[b].name)
@@ -208,18 +208,7 @@ function addOrder(a,b){
 }
 
 function addValue(a,b){
-    var categoryName;
-    switch(a){
-        case 1 : categoryName = ramyun;
-        break;
-        case 2 : categoryName = friedrice;
-        break;
-        case 3 : categoryName = snack;
-        break;
-        case 4 : categoryName = drink;
-        break
-    }
-
+    var categoryName = categoryFunc(a);
     var Ename=categoryName[b].Ename;
 
     if($('.'+ Ename).length == 0){
