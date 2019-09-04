@@ -22,7 +22,6 @@
 
                 <div class="searchwrap">
                     <span>상품검색</span>
-
                     <div class="search">
                         <input type="text" placeholder="상품명을 입력해주세요">
                         <span class="searchicon"><a href="#">검색아이콘</a></span>
@@ -30,9 +29,7 @@
                 </div>
             </div>
             <div class="content">
-                <ul id="category">
-                </ul>
-
+                <ul id="category"></ul>
                 <table class="item">
                     <thead>
                         <tr>
@@ -40,10 +37,7 @@
                             <th class="coPrice">가격</th>
                         </tr>
                     </thead>
-
-                    <tbody id = "itemtbody">
-                        
-                    </tbody>
+                    <tbody id = "itemtbody"></tbody>
                 </table>
 
                 <div class="itemcontent">
@@ -51,9 +45,9 @@
                         상품을 클릭해주세요
                     </div>
 
-                    <p id="itemcontentname"></p>
-                    <p id="itemcontentdetail"></p>
-                    <p id="itemcontentprice"><span id="won">원</span></p>
+                    <p id="itemContentName"></p>
+                    <p id="itemContentDetail"></p>
+                    <p id="itemContentPrice"><span id="won">원</span></p>
 
                     <div class="shoppingicon">
                         <button id="shoppingbutton"><i class="fas fa-shopping-cart"></i></button>
@@ -78,35 +72,24 @@
                             <th class="coDelete">삭제</th>
                         </tr>
                     </thead>
-
-                    <tbody id="orderlistTbody">
-                       
-                    </tbody>
+                    <tbody id="orderlistTbody"></tbody>
                 </table>
                 </div>
                 <div class="ordercalc">
                     <div>
-                    <span class="totalpriceTitle">주문금액</span>
-                    <span id="totalprice"> </span><span class="won">원</span>
+                    <span class="totalPriceTitle">주문금액</span>
+                    <span id="totalPrice"></span><span class="won">원</span>
                     </div>
                     <div>
                         <span class="paymentTitle">지불방법</span>
                         <input type="radio" name="payment" value="카드" checked="checked" >카드
                         <input type="radio" name="payment" value="현금" >현금
-                        
-
                     </div>
                     <div id="paymentdiv">
                     <span class="paymentamountTitle">지불금액</span>
                     <span class="paymentamount"> <input type="text" id="paymoney"></span><span class="won">원</span>
                     </div>
-                    <!-- <div>
-                    <span class="changeTitle">거스름돈</span>
-                    <span class="change"> </span><span class="won">원</span>
-                    </div> -->
-
                 </div>
-
             </div>
 
             <div class="buttons">
@@ -115,13 +98,8 @@
             </div>
         </div>
         <!-- box2 : 주문목록 -->
-
-
     </div>
     <!-- boxwrap -->
     </div>
-    
-    
-
 </body>
 </html>

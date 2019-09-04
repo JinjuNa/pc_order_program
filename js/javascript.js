@@ -16,14 +16,13 @@ window.onload = function(){
         $(this).siblings().removeClass("active")
         $(this).addClass("active")
         var itemidx = $(this).index();
-        $('#itempricelist li').siblings().removeClass("active")
-        $('#itempricelist li:nth-child('+(itemidx+1)+')').addClass("active")
         var categoryidx = $('#category li.active').index(); 
-        itemcontent(categoryidx,itemidx)
+        itemContent(categoryidx,itemidx)
         $('.shoppingicon').show();
     });
     
     $(document).on('click', '#shoppingbutton', function(){
+        showOrder();
         var categoryidx = $('#category li.active').index();     
         var orderidx = $('#itemtbody tr.active').index();
         addValue(categoryidx, orderidx)
@@ -34,9 +33,6 @@ window.onload = function(){
         updateAmount();
     })
 
-    //첫번째 항목은 두번 클릭해야 삭제가된다.   //여전히 그렇다.
-    //첫번째 deleteidx = 0 일때 다른childnodes가 삭제가되나?
-    //3번째 항목을 지우면, 2번쨰 항목이 삭제된다.
     $(document).on('click', '.delete', function(){
         var deleteidx = $(this).parent('tr').index();
         deleteOrder(deleteidx);
@@ -46,6 +42,7 @@ window.onload = function(){
     $('input[type=radio][name=payment]').change(function() {
         if (this.value == '현금') {
             $('#paymentdiv').show();
+            $('#paymoney').focus();
         }
         else if (this.value == '카드') {
             $('#paymentdiv').hide();
@@ -56,7 +53,7 @@ window.onload = function(){
         //현금.카드 중에 체크된 박스의 value를 가져고오고 싶다.
         var paycheckbox = document.getElementsByName('payment')
         var paymoney = document.getElementById("paymoney").value;
-        var FinalPrice = document.getElementById('totalprice').innerHTML
+        var FinalPrice = document.getElementById('totalPrice').innerHTML
         var retrunmoney = paymoney - FinalPrice;
         var orderlistId = document.getElementById('orderlistTbody')
         var len = $("#orderlistTbody tr").length;
@@ -86,17 +83,14 @@ window.onload = function(){
                 }
             }
         }
-    
-        
     })
-    
+
+    $('#closebutton').click(function(){
+        hideOrder();
+    })
 };
 
-
-
-
 //함수정의
-
 function categoryFunc(a){
     var categoryName;
     switch(a){
@@ -121,17 +115,17 @@ function itemNameList(a){
     document.getElementById('itemtbody').innerHTML=itemList;
 };
 
-//itemcontent 보이기
-function itemcontent(a,b){
+//itemContent 보이기
+function itemContent(a,b){
     var categoryName = categoryFunc(a);
     var image = '<img src="./img/item/' +categoryName[b].image + '">'
     var name = categoryName[b].name;
     var detail = categoryName[b].detail;
     var price = categoryName[b].price;
     document.getElementById('itemimage').innerHTML= image;
-    document.getElementById('itemcontentname').innerHTML= name;
-    document.getElementById('itemcontentdetail').innerHTML= detail;
-    document.getElementById('itemcontentprice').innerHTML= price + '원';
+    document.getElementById('itemContentName').innerHTML= name;
+    document.getElementById('itemContentDetail').innerHTML= detail;
+    document.getElementById('itemContentPrice').innerHTML= price + '원';
 };
 
  // getCategory 함수정의
@@ -144,7 +138,7 @@ function getCategory(){
     document.getElementById('category').innerHTML=show;
 };
 
-//addOrder 함수
+//주문 추가 했을시, 새로운 항목 추가 함수
 function addOrder(a,b){
     var categoryName = categoryFunc(a);
     var orderlistTbody = document.getElementById('orderlistTbody')
@@ -155,7 +149,7 @@ function addOrder(a,b){
     deleteIcon = '<a href="#"><i class="fas fa-trash-alt"></i></a>'
     
     newTr = document.createElement('tr')
-    newTr.classList.add(categoryName[b].Ename);
+    newTr.classList.add(categoryName[b].eName);
     newTdName = document.createElement('td');
     newTdPrice = document.createElement('td');
     newTdSelect = document.createElement('td');
@@ -175,17 +169,23 @@ function addOrder(a,b){
     orderlistTbody.appendChild(newTr);
 }
 
+//주문목록추가했을때 이미 존재하면, value추가, 없으면 새로운 항목추가
 function addValue(a,b){
     var categoryName = categoryFunc(a);
-    var Ename=categoryName[b].Ename;
-    if($('.'+ Ename).length == 0){
+    var eName=categoryName[b].eName;
+    if($('.'+ eName).length == 0){
         addOrder(a, b);
     }else{
-        var value = Number($('.' + Ename + ' select').val());
-        $('.' + Ename + ' select').val(value+1)
+        var value = Number($('.' + eName + ' select').val());
+        if(value==10){
+            alert("최대 주문 수량을 초과하였습니다.")
+        }else{
+            $('.' + eName + ' select').val(value+1)
+        }
     }
 }
 
+//주문 수량변화에 따라서, 가격을 업데이트 해주는 함수
 function updateAmount(){
     var NewTotalPrice = 0;
     var len = $("#orderlistTbody tr").length;
@@ -196,12 +196,23 @@ function updateAmount(){
         var v = selectTr.getElementsByTagName('select')[0].value;
         NewTotalPrice += p*v;
     }
-    document.getElementById('totalprice').innerHTML=NewTotalPrice  
+    document.getElementById('totalPrice').innerHTML=NewTotalPrice  
 }
 
+//주문삭제 아이콘 클릭했을때, 주문목록에서 주문항목 사라지는 함수
 function deleteOrder(a){
     var orderlistTbody = document.getElementById('orderlistTbody')  
-    orderlistTbody.removeChild(orderlistTbody.childNodes[a])
+    orderlistTbody.removeChild(orderlistTbody.childNodes[a+1])
 };
 
+//닫기를 눌렀을때, 주문목록 사라지는 함수
+function hideOrder(){
+    $('.box2').hide();
+    $('.box1').css('width','100%');
+}
 
+//장바구니버튼을 눌렀을때 다시 주문목록이 생기는 함수
+function showOrder(){
+    $('.box2').show();
+    $('.box1').css('width','70%');
+}
