@@ -202,7 +202,7 @@ function updateAmount(){
 //주문삭제 아이콘 클릭했을때, 주문목록에서 주문항목 사라지는 함수
 function deleteOrder(a){
     var orderlistTbody = document.getElementById('orderlistTbody')  
-    orderlistTbody.removeChild(orderlistTbody.childNodes[a+1])
+    orderlistTbody.removeChild(orderlistTbody.childNodes[a])
 };
 
 //닫기를 눌렀을때, 주문목록 사라지는 함수
