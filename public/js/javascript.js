@@ -40,9 +40,16 @@ window.onload = function () {
 
     $(document).on('click', '#shoppingbutton', function () {
         showOrder();
-        var orderidx = $('#itemtbody tr.active').attr('data-id');
-        console.log(orderidx);
-        addValue(orderidx);
+        var tr = $('#itemtbody tr.active');
+        var orderidx = tr.attr('data-id');
+        var name = tr.children('td').eq(0).text();
+        var price = tr.children('td').eq(1).text();
+        var item = {
+            id: orderidx,
+            name: name,
+            price: price
+        };
+        addValue(item);
         updateAmount();
         // $.ajax({
         //     url: 'http://localhost:3000/shopping/' + orderidx,
@@ -146,7 +153,6 @@ function itemContent (a) {
     var name = a[0].name;
     var detail = a[0].detail;
     var price = a[0].price;
-    // var ename = a[0].ename;
     document.getElementById('itemimage').innerHTML = image;
     document.getElementById('itemContentName').innerHTML = name;
     document.getElementById('itemContentDetail').innerHTML = detail;
@@ -170,22 +176,22 @@ function getCategory () {
 };
 
 // 주문 추가 했을시, 새로운 항목 추가 함수
-function addOrder (a) {
+function addOrder (item) {
     var orderlistTbody = document.getElementById('orderlistTbody');
 
-    var newName = document.createTextNode(a[0].name);
-    var newPrice = document.createTextNode(a[0].price);
+    var newName = document.createTextNode(item.name);
+    var newPrice = document.createTextNode(item.price);
     var selectBox = '<select name="amount"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>';
     var deleteIcon = '<a href="#"><i class="fas fa-trash-alt"></i></a>';
 
     var newTr = document.createElement('tr');
-    // newTr.classList.add(a[0].eName);
     var newTdName = document.createElement('td');
     var newTdPrice = document.createElement('td');
     var newTdSelect = document.createElement('td');
     var newTdDelete = document.createElement('td');
     newTdDelete.classList.add('delete');
 
+    newTr.setAttribute('data-id'    , item.id);
     newTdName.appendChild(newName);
     newTdPrice.appendChild(newPrice);
     newTdSelect.innerHTML = selectBox;
@@ -200,15 +206,15 @@ function addOrder (a) {
 }
 
 // 주문목록추가했을때 이미 존재하면, value추가, 없으면 새로운 항목추가
-function addValue (dataId) {
-    if ($('[data-id=' + dataId + ']').length == 0) {
-        addOrder(dataId);
+function addValue (item) {
+    if ($('#orderlistTbody [data-id=' + item.id + ']').length == 0) {
+        addOrder(item);
     } else {
-        var value = Number($('[data-id=' + dataId + '] select').val());
+        var value = Number($('[data-id=' + item.id + '] select').val());
         if (value === 10) {
             alert('최대 주문 수량을 초과하였습니다.');
         } else {
-            $('[data-id=' + dataId + '] select').val(value + 1);
+            $('[data-id=' + item.id + '] select').val(value + 1);
         }
     }
 }
