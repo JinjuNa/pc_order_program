@@ -23,7 +23,7 @@ window.onload = function () {
     $(document).on('click', '#itemtbody tr', function () {
         $(this).siblings().removeClass('active');
         $(this).addClass('active');
-        var itemidx = $(this).attr('id');
+        var itemidx = $(this).attr('data-id');
         $('.shoppingicon').show();
         $.ajax({
             url: 'http://localhost:3000/item/' + itemidx,
@@ -40,17 +40,20 @@ window.onload = function () {
 
     $(document).on('click', '#shoppingbutton', function () {
         showOrder();
-        var orderidx = $('#itemtbody tr.active').attr('id');
-        $.ajax({
-            url: 'http://localhost:3000/shopping/' + orderidx,
-            dataType: 'json',
-            type: 'GET',
-            success: function (result) {
-                console.log(result);
-                addValue(result);
-                updateAmount();
-            }
-        });
+        var orderidx = $('#itemtbody tr.active').attr('data-id');
+        console.log(orderidx);
+        addValue(orderidx);
+        updateAmount();
+        // $.ajax({
+        //     url: 'http://localhost:3000/shopping/' + orderidx,
+        //     dataType: 'json',
+        //     type: 'GET',
+        //     success: function (result) {
+        //         console.log(result);
+        //         addValue(result);
+        //         updateAmount();
+        //     }
+        // });
     });
 
     $(document).on('change', 'select', function () {
@@ -132,7 +135,7 @@ window.onload = function () {
 function itemNameList (a) {
     var itemList = '';
     for (var i = 0; i < a.length; i++) {
-        itemList += '<tr id=' + a[i].num + '><td>' + a[i].name + '</td><td>' + a[i].price + '</td></tr>';
+        itemList += '<tr data-id=' + a[i].num + '><td>' + a[i].name + '</td><td>' + a[i].price + '</td></tr>';
     }
     document.getElementById('itemtbody').innerHTML = itemList;
 };
@@ -143,6 +146,7 @@ function itemContent (a) {
     var name = a[0].name;
     var detail = a[0].detail;
     var price = a[0].price;
+    // var ename = a[0].ename;
     document.getElementById('itemimage').innerHTML = image;
     document.getElementById('itemContentName').innerHTML = name;
     document.getElementById('itemContentDetail').innerHTML = detail;
@@ -175,7 +179,7 @@ function addOrder (a) {
     var deleteIcon = '<a href="#"><i class="fas fa-trash-alt"></i></a>';
 
     var newTr = document.createElement('tr');
-    newTr.classList.add(a[0].eName);
+    // newTr.classList.add(a[0].eName);
     var newTdName = document.createElement('td');
     var newTdPrice = document.createElement('td');
     var newTdSelect = document.createElement('td');
@@ -196,16 +200,15 @@ function addOrder (a) {
 }
 
 // 주문목록추가했을때 이미 존재하면, value추가, 없으면 새로운 항목추가
-function addValue (a) {
-    var eName = a[0].eName;
-    if ($('.' + eName).length == 0) {
-        addOrder(a);
+function addValue (dataId) {
+    if ($('[data-id=' + dataId + ']').length == 0) {
+        addOrder(dataId);
     } else {
-        var value = Number($('.' + eName + ' select').val());
+        var value = Number($('[data-id=' + dataId + '] select').val());
         if (value === 10) {
             alert('최대 주문 수량을 초과하였습니다.');
         } else {
-            $('.' + eName + ' select').val(value + 1);
+            $('[data-id=' + dataId + '] select').val(value + 1);
         }
     }
 }

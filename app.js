@@ -65,15 +65,15 @@ app.get('/item/:num', function (req, res) {
 });
 
 // 쇼핑버튼
-app.get('/shopping/:num', function (req, res) {
-    db.query(`SELECT name, eName, price FROM PRODUCT WHERE NUM = ${req.params.num}`, function (error, result) {
-        if (error) {
-            console.log(error);
-        }
-        res.send(result);
-        console.log(result);
-    });
-});
+// app.get('/shopping/:num', function (req, res) {
+//     db.query(`SELECT name, eName, price FROM PRODUCT WHERE NUM = ${req.params.num}`, function (error, result) {
+//         if (error) {
+//             console.log(error);
+//         }
+//         res.send(result);
+//         console.log(result);
+//     });
+// });
 // 검색한 키워드에 맞는 아이템들의 이름과 가격리스트
 app.get('/search/:keyword', function (req, res) {
     db.query(`SELECT num, name, price FROM PRODUCT WHERE NAME LIKE '%${req.params.keyword}%'`, function (error, result) {
