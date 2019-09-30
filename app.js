@@ -27,20 +27,18 @@ app.get('/allCategory', function (req, res) {
             console.log(error);
         }
         res.send(result);
-        console.log(result);
     });
 });
 
 // 카테고리 넘버별 항목의 이름, 가격 보여주기
 app.get('/category/:categoryNum', function (req, res) {
     console.log(`${req.params.categoryNum}`);
-    if (`${req.params.categoryNum}` == 0) {
+    if (`${req.params.categoryNum}` === '0') {
         db.query('SELECT num, name, price FROM PRODUCT', function (error, result) {
             if (error) {
                 console.log(error);
             }
             res.send(result);
-            console.log(result);
         });
     } else {
         db.query(`SELECT num, name, price FROM PRODUCT WHERE CATEGORYNUM = ${req.params.categoryNum}`, function (error, result) {
@@ -48,7 +46,6 @@ app.get('/category/:categoryNum', function (req, res) {
                 console.log(error);
             }
             res.send(result);
-            console.log(result);
         });
     }
 });
@@ -60,7 +57,6 @@ app.get('/item/:num', function (req, res) {
             console.log(error);
         }
         res.send(result);
-        console.log(result);
     });
 });
 
@@ -71,19 +67,8 @@ app.get('/search/:keyword', function (req, res) {
             console.log(error);
         }
         res.send(result);
-        console.log(result);
     });
 });
-
-//   app.get('/order/:orderlist', function (req, res) {
-//     db.query(`SELECT NAME, detail, price, image FROM PRODUCT WHERE NUM = ${req.params.num}`, function(error, result, fields){
-//         if(error){
-//             console.log(error);
-//         }
-//         res.send(result);
-//         console.log(result);
-//     });
-//   });
 
 app.listen(3000, function () {
     console.log('Example app listening on port 3000!');

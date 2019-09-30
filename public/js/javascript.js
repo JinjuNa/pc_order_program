@@ -1,8 +1,7 @@
-
 window.onload = function () {
-// getCategory 함수사용
-    getCategory();
     hideOrder();
+    // getCategory 함수사용
+    getCategory();
 
     $(document).on('click', '#category li', function () {
         $(this).siblings().removeClass('active');
@@ -34,8 +33,6 @@ window.onload = function () {
                 itemContent(result);
             }
         });
-
-
     });
 
     $(document).on('click', '#shoppingbutton', function () {
@@ -51,16 +48,6 @@ window.onload = function () {
         };
         addValue(item);
         updateAmount();
-        // $.ajax({
-        //     url: 'http://localhost:3000/shopping/' + orderidx,
-        //     dataType: 'json',
-        //     type: 'GET',
-        //     success: function (result) {
-        //         console.log(result);
-        //         addValue(result);
-        //         updateAmount();
-        //     }
-        // });
     });
 
     $(document).on('change', 'select', function () {
@@ -131,11 +118,10 @@ window.onload = function () {
             dataType: 'json',
             type: 'GET',
             success: function (result) {
-                console.log(result);
                 itemNameList(result);
             }
         });
-    })
+    });
 };
 
 // 라면류 보이기
